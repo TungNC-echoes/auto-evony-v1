@@ -1,0 +1,281 @@
+{
+    "last_updated": "2025-05-17 20:41:17",
+    "boss_count": 25,
+    "bosses": [
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 101 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "566",
+                "Y": "732"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 116 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "558",
+                "Y": "754"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 0
+        },
+        {
+            "name": "Người đá",
+            "coordinates": "D 68 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "511",
+                "Y": "722"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 1
+        },
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 160 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "386",
+                "Y": "543"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 0
+        },
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 167 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "379",
+                "Y": "543"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 0
+        },
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 173 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "386",
+                "Y": "528"
+            },
+            "timestamp": "2025-05-17 20:41:12",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 170 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "552",
+                "Y": "817"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 164 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "341",
+                "Y": "677"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 143 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "362",
+                "Y": "652"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Người đá",
+            "coordinates": "D 128 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "376",
+                "Y": "636"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 1
+        },
+        {
+            "name": "(Trùm quái vật) Kamaitachi",
+            "coordinates": "D 154 |\nQuái vật Boss Lv12\n| 89M",
+            "level": {
+                "S": "1973",
+                "X": "351",
+                "Y": "658"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 161 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "344",
+                "Y": "658"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 174 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "332",
+                "Y": "668"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 152 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "402",
+                "Y": "768"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Người đá",
+            "coordinates": "D 125 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "407",
+                "Y": "732"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 138 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "384",
+                "Y": "724"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "(Trùm) Quỷ Vương",
+            "coordinates": "D 145 |\nQuái vật Boss Lv11\n| 60M",
+            "level": {
+                "S": "1973",
+                "X": "383",
+                "Y": "734"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 170 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "360",
+                "Y": "746"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 168 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "337",
+                "Y": "649"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 186 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "691",
+                "Y": "654"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 191 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "325",
+                "Y": "584"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "(Trùm quái vật) Kamaitachi",
+            "coordinates": "D 164 |\nQuái vật Boss Lv12\n| 89M",
+            "level": {
+                "S": "1973",
+                "X": "350",
+                "Y": "593"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 152 |\nQuái vật sự kiện Lv1\n| 12M",
+            "level": {
+                "S": "1973",
+                "X": "362",
+                "Y": "600"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Hiệp sĩ Cấp thấp Bayard",
+            "coordinates": "D 71 |\nQuái vật Boss Lv1\n| 66M",
+            "level": {
+                "S": "1973",
+                "X": "481",
+                "Y": "720"
+            },
+            "timestamp": "2025-05-17 20:41:13",
+            "attacked": 0
+        },
+        {
+            "name": "Cerberus Cấp Thấp",
+            "coordinates": "D 75 |\nQuái vật Boss Lv1\n| 68M",
+            "level": {
+                "S": "1973",
+                "X": "444",
+                "Y": "699"
+            },
+            "timestamp": "2025-05-17 20:41:14",
+            "attacked": 0
+        }
+    ]
+}

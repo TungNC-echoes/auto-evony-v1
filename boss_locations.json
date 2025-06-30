@@ -1,0 +1,281 @@
+{
+    "last_updated": "2025-06-30 16:17:44",
+    "boss_count": 25,
+    "bosses": [
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 111 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "487",
+                "Y": "303"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 178 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "458",
+                "Y": "177"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 189 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "408",
+                "Y": "289"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 191 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "504",
+                "Y": "456"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 208 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "796",
+                "Y": "230"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 213 |\nQuái vật sự kiện Lv3\n| 86M",
+            "level": {
+                "S": "1973",
+                "X": "796",
+                "Y": "359"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 222 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "553",
+                "Y": "509"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 226 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "505",
+                "Y": "82"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 228 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "370",
+                "Y": "326"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 235 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "796",
+                "Y": "167"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 235 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "502",
+                "Y": "73"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 240 |\nQuái vật sự kiện Lv3\n| 86M",
+            "level": {
+                "S": "1973",
+                "X": "438",
+                "Y": "471"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 241 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "831",
+                "Y": "349"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 245 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "790",
+                "Y": "442"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 252 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "408",
+                "Y": "457"
+            },
+            "timestamp": "2025-06-30 15:59:58",
+            "attacked": 1
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 253 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "846",
+                "Y": "335"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 261 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "770",
+                "Y": "94"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 261 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "821",
+                "Y": "161"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 274 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "324",
+                "Y": "252"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 274 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "402",
+                "Y": "484"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 283 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "807",
+                "Y": "476"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 297 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "894",
+                "Y": "287"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 300 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "349",
+                "Y": "457"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 305 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "654",
+                "Y": "589"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        },
+        {
+            "name": "Lãnh chúa",
+            "coordinates": "D 310 |\nQuái vật sự kiện Lv2\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "286",
+                "Y": "312"
+            },
+            "timestamp": "2025-06-30 15:59:59",
+            "attacked": 0
+        }
+    ]
+}
