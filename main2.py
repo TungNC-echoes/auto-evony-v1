@@ -7,6 +7,7 @@ from utils.adb_utils import swipe_up, swipe_down, select_memu_devices, set_devic
 from actions.rally import auto_join_rally
 from actions.market_actions import auto_buy_meat
 
+
 def show_feature_menu():
     """Hiển thị menu chọn tính năng"""
     print("\nChọn tính năng muốn sử dụng:")
@@ -15,16 +16,17 @@ def show_feature_menu():
     print("3. Auto tham gia War (không chọn tướng)")
     return input("Nhập số tương ứng với tính năng (1-3): ").strip()
 
+
 def run_feature_with_retry(device, feature_choice, device_lock):
     """Chạy tính năng với cơ chế thử lại liên tục"""
     max_retries = 3  # Số lần thử lại tối đa cho mỗi lỗi
     retry_count = 0
-    
+
     while True:  # Vòng lặp vô hạn để tiếp tục chạy
         try:
             with device_lock:
                 set_device(device['device_id'])
-            
+
             if feature_choice == "1":
                 print(f"Bắt đầu auto tham gia Rally trên {device['name']}...")
                 auto_join_rally(device['device_id'], use_general=True)  # Sử dụng rally với cờ có chọn tướng
@@ -34,34 +36,36 @@ def run_feature_with_retry(device, feature_choice, device_lock):
             elif feature_choice == "3":
                 print(f"Bắt đầu auto tham gia War (không chọn tướng) trên {device['name']}...")
                 auto_join_rally(device['device_id'], use_general=False)  # Sử dụng rally với cờ không chọn tướng
-                
+
             # Reset số lần thử lại khi thành công
             retry_count = 0
-                
+
         except Exception as e:
             print(f"Lỗi trên {device['name']}: {e}")
             retry_count += 1
-            
+
             if retry_count >= max_retries:
                 print(f"Đã thử lại {max_retries} lần không thành công, đợi thêm thời gian...")
                 time.sleep(30)  # Đợi lâu hơn sau nhiều lần thất bại
                 retry_count = 0  # Reset counter
                 continue
-            
+
             if "libpng error" in str(e):
                 print(f"Lỗi đọc ảnh trên {device['name']}, đang thử lại... (Lần {retry_count}/{max_retries})")
                 time.sleep(5)  # Chờ lâu hơn cho lỗi đọc ảnh
                 continue
-                
+
             elif "Không ở trong chợ đen" in str(e):
-                print(f"Không ở trong chợ đen trên {device['name']}, đang thử vào lại... (Lần {retry_count}/{max_retries})")
+                print(
+                    f"Không ở trong chợ đen trên {device['name']}, đang thử vào lại... (Lần {retry_count}/{max_retries})")
                 time.sleep(3)
                 continue
-                
+
             else:
                 print(f"Lỗi khác trên {device['name']}, đang thử lại... (Lần {retry_count}/{max_retries})")
                 time.sleep(2)
                 continue
+
 
 def run_feature_for_device(device, feature_choice, device_lock):
     """Chạy tính năng cho một thiết bị cụ thể"""
@@ -71,10 +75,11 @@ def run_feature_for_device(device, feature_choice, device_lock):
     except Exception as e:
         print(f"Lỗi nghiêm trọng khi chạy trên {device['name']}: {e}")
 
+
 def main():
     """Hàm chính của chương trình"""
     print("Chào mừng đến với EVONY AUTO!")
-    
+
     try:
         # Chọn giả lập
         devices = select_memu_devices()
@@ -94,11 +99,11 @@ def main():
             print("Lựa chọn không hợp lệ, vui lòng chọn lại!")
 
         print(f"\nBắt đầu chạy trên {len(devices)} thiết bị...")
-        
+
         # Tạo lock cho mỗi thiết bị
         manager = Manager()
         device_locks = {device['device_id']: manager.Lock() for device in devices}
-        
+
         # Tạo và khởi chạy các process
         processes = []
         for device in devices:
@@ -108,11 +113,11 @@ def main():
             )
             processes.append(process)
             process.start()
-        
+
         # Chờ tất cả các process hoàn thành
         for process in processes:
             process.join()
-            
+
     except KeyboardInterrupt:
         print("\nĐã nhận được tín hiệu dừng chương trình...")
         # Kết thúc tất cả các process
@@ -121,6 +126,7 @@ def main():
                 process.terminate()
     except Exception as e:
         print(f"Lỗi không mong muốn: {e}")
+
 
 if __name__ == "__main__":
     main()  # Bắt đầu chạy bot tự động

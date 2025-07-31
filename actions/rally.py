@@ -1,11 +1,12 @@
 import time
-from actions.war_actions import join_war_sequence, continue_war_sequence
+from actions.war_actions import join_war_sequence, continue_war_sequence, join_war_sequence_no_general, continue_war_sequence_no_general
 from utils.image_utils import check_button_exists, find_and_click_button
 from utils.adb_utils import swipe_up, swipe_down, adb_command
 
-def auto_join_rally(device_id=None):
+def auto_join_rally(device_id=None, use_general=True):
     """Hàm chạy bot tự động tham gia chiến tranh"""
-    print("Bắt đầu chạy bot tự động tham gia chiến tranh...")
+    war_type = "có chọn tướng" if use_general else "không chọn tướng"
+    print(f"Bắt đầu chạy bot tự động tham gia chiến tranh ({war_type})...")
 
     # Thực hiện chuỗi hành động tham gia chiến tranh lần đầu
     while True:
@@ -24,13 +25,22 @@ def auto_join_rally(device_id=None):
                 time.sleep(2)  # Chờ animation hoàn thành
 
             # print("Đang thử tham gia chiến tranh...")
-            if join_war_sequence(device_id):
-                # print("Đã hoàn thành chuỗi hành động tham gia chiến tranh lần đầu")
-                break
+            if use_general:
+                if join_war_sequence(device_id):
+                    # print("Đã hoàn thành chuỗi hành động tham gia chiến tranh lần đầu")
+                    break
+                else:
+                    # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh lần đầu")
+                    # print("Chờ 30 giây trước khi thử lại...")
+                    time.sleep(30)
             else:
-                # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh lần đầu")
-                # print("Chờ 30 giây trước khi thử lại...")
-                time.sleep(30)
+                if join_war_sequence_no_general(device_id):
+                    # print("Đã hoàn thành chuỗi hành động tham gia chiến tranh lần đầu (không chọn tướng)")
+                    break
+                else:
+                    # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh lần đầu (không chọn tướng)")
+                    # print("Chờ 30 giây trước khi thử lại...")
+                    time.sleep(30)
         except Exception as e:
             # print(f"Lỗi trong quá trình tham gia chiến tranh lần đầu: {e}")
             # print("Chờ 30 giây trước khi thử lại...")
@@ -56,12 +66,20 @@ def auto_join_rally(device_id=None):
                     time.sleep(2)  # Chờ animation hoàn thành
 
                 # Thực hiện lại chuỗi hành động từ war_button
-                if join_war_sequence(device_id):
-                    print("Đã hoàn thành chuỗi hành động tham gia chiến tranh")
+                if use_general:
+                    if join_war_sequence(device_id):
+                        print("Đã hoàn thành chuỗi hành động tham gia chiến tranh")
+                    else:
+                        # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh")
+                        # print("Chờ 30 giây trước khi thử lại...")
+                        time.sleep(30)
                 else:
-                    # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh")
-                    # print("Chờ 30 giây trước khi thử lại...")
-                    time.sleep(30)
+                    if join_war_sequence_no_general(device_id):
+                        print("Đã hoàn thành chuỗi hành động tham gia chiến tranh (không chọn tướng)")
+                    else:
+                        # print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh (không chọn tướng)")
+                        # print("Chờ 30 giây trước khi thử lại...")
+                        time.sleep(30)
                 continue
 
             # Chờ 10 giây trước khi kiểm tra
@@ -72,10 +90,16 @@ def auto_join_rally(device_id=None):
             if check_button_exists("join_button", device_id=device_id):
                 # print("Tìm thấy nút tham gia, bắt đầu tham gia chiến tranh...")
                 # Thực hiện chuỗi hành động từ join_button
-                if continue_war_sequence(device_id):
-                    print("Đã hoàn thành chuỗi hành động tham gia chiến tranh")
+                if use_general:
+                    if continue_war_sequence(device_id):
+                        print("Đã hoàn thành chuỗi hành động tham gia chiến tranh")
+                    else:
+                        print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh")
                 else:
-                    print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh")
+                    if continue_war_sequence_no_general(device_id):
+                        print("Đã hoàn thành chuỗi hành động tham gia chiến tranh (không chọn tướng)")
+                    else:
+                        print("Không thể hoàn thành chuỗi hành động tham gia chiến tranh (không chọn tướng)")
             else:
                 # Thực hiện kéo màn hình
                 if scroll_up:

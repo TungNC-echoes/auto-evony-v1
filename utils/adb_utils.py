@@ -36,17 +36,37 @@ def select_memu_devices():
     for device in devices:
         print(f"{device['index']}. {device['name']} ({device['device_id']})")
     
-    choice = input("\nChọn số thứ tự MEmu (Enter để chọn tất cả, các số cách nhau bởi dấu cách, -idx để loại bỏ device): ").strip()
+    choice = input("\nChọn số thứ tự MEmu (Enter để chọn tất cả, các số cách nhau bởi dấu cách, -idx để loại bỏ device, -idx1 -idx2 để loại bỏ nhiều): ").strip()
     if not choice:
         return devices
         
     try:
-        # Xử lý trường hợp loại bỏ device
+        # Xử lý trường hợp loại bỏ device (có thể nhiều device)
         if choice.startswith('-'):
-            exclude_index = int(choice[1:])  # Lấy số sau dấu -
-            selected_devices = [d for d in devices if d['index'] != exclude_index]
+            # Tách các số loại bỏ (ví dụ: "-1 -2 -3" -> ["-1", "-2", "-3"])
+            exclude_parts = choice.split()
+            exclude_indices = []
+            
+            for part in exclude_parts:
+                if part.startswith('-'):
+                    try:
+                        exclude_index = int(part[1:])  # Lấy số sau dấu -
+                        exclude_indices.append(exclude_index)
+                    except ValueError:
+                        print(f"Lỗi: '{part}' không phải là số hợp lệ!")
+                        continue
+            
+            # Loại bỏ các device có index trong danh sách exclude
+            selected_devices = [d for d in devices if d['index'] not in exclude_indices]
+            
+            # Thông báo kết quả
             if len(selected_devices) == len(devices):
-                print(f"Không tìm thấy device có index {exclude_index} để loại bỏ!")
+                print(f"Không tìm thấy device nào trong danh sách loại bỏ: {exclude_indices}")
+            else:
+                excluded_count = len(devices) - len(selected_devices)
+                print(f"Đã loại bỏ {excluded_count} device: {exclude_indices}")
+                print(f"Còn lại {len(selected_devices)} device")
+            
             return selected_devices
             
         # Tách các số và chuyển thành list số nguyên

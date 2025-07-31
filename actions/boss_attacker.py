@@ -127,12 +127,13 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
         "Phù thủy": {
             "folder": "phu_thuy",
             "image_path": "images/buttons/attack/phu_thuy",
-            "troops_count": "700000"
+            "troops_count": "500000"
+            # "threshold": 0.75
         },
         "Nhân Sư": {
             "folder": "nhan_su",
             "image_path": "images/buttons/attack/nhan_su",
-            "troops_count": "700000",
+            "troops_count": "500000",
             # "threshold": 0.75
         },
         "Rùa Nham thạch": {
@@ -151,6 +152,12 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
             "image_path": "images/buttons/attack/lanh_chua",
             "troops_count": "700000",
             # "threshold": 0.75-0.8
+        },
+        "Hiệp sĩ Cấp thấp Bayard": {
+            "folder": "bayard",
+            "image_path": "images/buttons/attack/Bayard",
+            "troops_count": "700000",
+            # "threshold": 0.8
         }
     }
     
@@ -232,8 +239,9 @@ def execute_attack_sequence(start_time=None, troops_count="300000"):
                         time.sleep(2)
 
                     # Nhập số lượng quân và hoàn thành tấn công
+                    adb_command('adb shell input keyevent KEYCODE_DEL')
                     adb_command(f'adb shell input text "{troops_count}"')
-                    time.sleep(1)
+                    # time.sleep(1)
                     adb_command('adb shell input keyevent KEYCODE_ENTER')
                     time.sleep(1)
 
