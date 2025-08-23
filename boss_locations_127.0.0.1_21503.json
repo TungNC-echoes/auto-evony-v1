@@ -1,280 +1,280 @@
 {
-    "last_updated": "2025-07-23 12:12:47",
+    "last_updated": "2025-08-18 03:53:59",
     "boss_count": 25,
     "bosses": [
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 70 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 29 |\nQuái vật sự kiện Lv2\n| 22M",
+            "level": {
+                "S": "1973",
+                "X": "564",
+                "Y": "552"
+            },
+            "timestamp": "2025-08-18 03:53:56",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 113 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
                 "X": "550",
-                "Y": "610"
+                "Y": "660"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:56",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 149 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 117 |\nQuái vật sự kiện Lv3\n| 74M",
             "level": {
                 "S": "1973",
-                "X": "704",
-                "Y": "454"
+                "X": "480",
+                "Y": "518"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:56",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 165 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 162 |\nQuái vật sự kiện Lv3\n| 74M",
             "level": {
                 "S": "1973",
-                "X": "726",
-                "Y": "458"
+                "X": "680",
+                "Y": "692"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:56",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 169 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 221 |\nQuái vật sự kiện Lv3\n| 74M",
             "level": {
                 "S": "1973",
-                "X": "742",
-                "Y": "634"
+                "X": "412",
+                "Y": "424"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:56",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 169 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 239 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "702",
-                "Y": "682"
+                "X": "678",
+                "Y": "332"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 173 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 261 |\nQuái vật sự kiện Lv3\n| 74M",
             "level": {
                 "S": "1973",
-                "X": "701",
-                "Y": "690"
+                "X": "728",
+                "Y": "330"
             },
-            "timestamp": "2025-07-23 12:12:44",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 191 |\nQuái vật Boss Lv1\n| 66M",
-            "level": {
-                "S": "1973",
-                "X": "425",
-                "Y": "464"
-            },
-            "timestamp": "2025-07-23 12:12:45",
-            "attacked": 0
-        },
-        {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 206 |\nQuái vật Boss Lv1\n| 66M",
-            "level": {
-                "S": "1973",
-                "X": "448",
-                "Y": "407"
-            },
-            "timestamp": "2025-07-23 12:12:45",
-            "attacked": 0
-        },
-        {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 218 |\nQuái vật Boss Lv1\n| 66M",
-            "level": {
-                "S": "1973",
-                "X": "796",
-                "Y": "478"
-            },
-            "timestamp": "2025-07-23 12:12:45",
-            "attacked": 0
-        },
-        {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 241 |\nQuái vật Boss Lv1\n| 66M",
-            "level": {
-                "S": "1973",
-                "X": "350",
-                "Y": "556"
-            },
-            "timestamp": "2025-07-23 12:12:45",
-            "attacked": 0
-        },
-        {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 246 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 286 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
                 "X": "820",
-                "Y": "466"
+                "Y": "381"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 250 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 291 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "799",
-                "Y": "417"
+                "X": "318",
+                "Y": "649"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 253 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 295 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "573",
-                "Y": "807"
+                "X": "516",
+                "Y": "840"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 257 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 345 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "387",
-                "Y": "706"
+                "X": "310",
+                "Y": "754"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 259 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 357 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "672",
-                "Y": "309"
+                "X": "464",
+                "Y": "220"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 267 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 362 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "633",
-                "Y": "289"
+                "X": "502",
+                "Y": "202"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 267 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 364 |\nQuái vật sự kiện Lv3\n| 74M",
             "level": {
                 "S": "1973",
-                "X": "501",
-                "Y": "804"
+                "X": "570",
+                "Y": "918"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 271 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 390 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "777",
-                "Y": "356"
+                "X": "498",
+                "Y": "174"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 274 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 410 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "832",
-                "Y": "420"
+                "X": "480",
+                "Y": "950"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 289 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 411 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "880",
-                "Y": "566"
+                "X": "936",
+                "Y": "780"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 294 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 419 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "307",
-                "Y": "630"
+                "X": "368",
+                "Y": "906"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 295 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 424 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "316",
-                "Y": "454"
+                "X": "887",
+                "Y": "249"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 297 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 425 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "334",
-                "Y": "702"
+                "X": "876",
+                "Y": "238"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 304 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 425 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "832",
-                "Y": "367"
+                "X": "1014",
+                "Y": "510"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         },
         {
-            "name": "Hiệp sĩ Cấp thấp Bayard",
-            "coordinates": "D 305 |\nQuái vật Boss Lv1\n| 66M",
+            "name": "Nhân Sư",
+            "coordinates": "D 427 |\nQuái vật sự kiện Lv2\n| 22M",
             "level": {
                 "S": "1973",
-                "X": "288",
-                "Y": "592"
+                "X": "807",
+                "Y": "922"
             },
-            "timestamp": "2025-07-23 12:12:45",
+            "timestamp": "2025-08-18 03:53:57",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 429 |\nQuái vật sự kiện Lv2\n| 22M",
+            "level": {
+                "S": "1973",
+                "X": "588",
+                "Y": "982"
+            },
+            "timestamp": "2025-08-18 03:53:57",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 429 |\nQuái vật sự kiện Lv2\n| 22M",
+            "level": {
+                "S": "1973",
+                "X": "401",
+                "Y": "169"
+            },
+            "timestamp": "2025-08-18 03:53:57",
+            "attacked": 0
+        },
+        {
+            "name": "Nhân Sư",
+            "coordinates": "D 433 |\nQuái vật sự kiện Lv2\n| 22M",
+            "level": {
+                "S": "1973",
+                "X": "753",
+                "Y": "955"
+            },
+            "timestamp": "2025-08-18 03:53:57",
             "attacked": 0
         }
     ]

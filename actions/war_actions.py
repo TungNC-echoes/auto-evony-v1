@@ -83,6 +83,7 @@ def handle_insufficient_stamina(device_id=None):
     """Xử lý trường hợp không đủ thể lực"""
     try:
         print("Đang xử lý trường hợp không đủ thể lực...")
+        time.sleep(1)
         return click_button_sequence(INSUFFICIENT_STAMINA_BUTTONS, device_id, "insufficient stamina")
     except Exception as e:
         print(f"Lỗi trong quá trình xử lý không đủ thể lực: {e}")

@@ -76,7 +76,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
             for image_file in os.listdir(image_folder):
                 if image_file.endswith(('.jpg', '.JPG', '.png', '.PNG')):
                     image_name = os.path.splitext(image_file)[0]
-                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, 0.75):
+                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, 0.8):
                         print(f"Đã tìm thấy và click vào {boss_name}")
                         result = execute_attack_sequence(start_time, troops_count)  # Truyền số lượng quân
                         if result == "update_required":
@@ -133,19 +133,19 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
         "Nhân Sư": {
             "folder": "nhan_su",
             "image_path": "images/buttons/attack/nhan_su",
-            "troops_count": "500000",
+            "troops_count": "800000",
             # "threshold": 0.75
         },
         "Rùa Nham thạch": {
             "folder": "rua",
             "image_path": "images/buttons/attack/rua",
-            "troops_count": "700000"
+            "troops_count": "900000"
         },
         "Ymir": {
             "folder": "ymir",
             "image_path": "images/buttons/attack/ymir",
-            "troops_count": "700000",
-            # "threshold": 0.75
+            "troops_count": "50000",
+            # "threshold": 0.8
         },
         "Lãnh chúa": {
             "folder": "lanh_chua",
@@ -157,6 +157,12 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
             "folder": "bayard",
             "image_path": "images/buttons/attack/Bayard",
             "troops_count": "700000",
+            # "threshold": 0.8
+        },
+        "Normal Serpopard": {
+            "folder": "serpopard",
+            "image_path": "images/buttons/attack/serpopard",
+            "troops_count": "500000",
             # "threshold": 0.8
         }
     }
