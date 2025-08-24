@@ -7,6 +7,17 @@ from utils.adb_utils import swipe_up, swipe_down, select_memu_devices, set_devic
 from actions.rally import auto_join_rally
 from actions.market_actions import auto_buy_meat
 
+# Import cho attack boss
+import sys
+import os
+from datetime import datetime
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from actions.user_interface import get_boss_selection, display_boss_list
+from actions.get_location_boss import get_boss_locations, save_to_json
+from actions.boss_data_manager import load_boss_data, group_bosses_by_name
+from actions.boss_attacker import attack_selected_bosses
+
 
 def show_feature_menu():
     """Hiển thị menu chọn tính năng"""
@@ -14,7 +25,73 @@ def show_feature_menu():
     print("1. Auto tham gia Rally")
     print("2. Auto mua thịt")
     print("3. Auto tham gia War (không chọn tướng)")
-    return input("Nhập số tương ứng với tính năng (1-3): ").strip()
+    print("4. Auto tấn công Boss")
+    return input("Nhập số tương ứng với tính năng (1-4): ").strip()
+
+
+def run_attack_boss_for_device(device_id):
+    """Chạy attack_boss cho một device cụ thể"""
+    try:
+        # Thiết lập device
+        set_device(device_id)
+
+        print(f"Bắt đầu tấn công boss trên device {device_id}")
+
+        # Bước 1: Cập nhật vị trí boss từ thiết bị
+        print(
+            f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Đang cập nhật vị trí boss từ thiết bị {device_id}...")
+        bosses = get_boss_locations()
+
+        if not bosses:
+            print("Không tìm thấy thông tin boss!")
+            return
+
+        # Lưu thông tin boss vào file
+        if not save_to_json(bosses, device_id=device_id):
+            print("Không thể lưu thông tin boss vào file!")
+            return
+
+        # Bước 2: Tự động chọn tất cả boss (tránh input trong multi-process)
+        boss_groups = group_bosses_by_name(bosses)
+        initial_selection = []
+
+        # Chọn tất cả boss có sẵn
+        for boss_name, boss_group in boss_groups.items():
+            initial_selection.append(boss_group)
+
+        if not initial_selection:
+            print("Không có boss nào để tấn công!")
+            return
+
+        print(f"Đã tự động chọn {len(initial_selection)} loại boss để tấn công")
+
+        # Bước 3: Bắt đầu vòng lặp tấn công
+        start_time = time.time()
+        while True:
+            # Kiểm tra số boss chưa tấn công và hiển thị thông tin
+            unattacked_count = sum(1 for group in initial_selection
+                                   for _, boss in group
+                                   if not boss.get('attacked', 0))
+
+            remaining_time = int(1800 - (time.time() - start_time))  # 30 phút = 1800 giây
+            print(f"\nCòn {unattacked_count} boss chưa tấn công")
+            print(f"Thời gian còn lại: {remaining_time} giây")
+
+            # Thực hiện tấn công các boss đã chọn
+            result = attack_selected_bosses(initial_selection, bosses, start_time)
+
+            # Kiểm tra kết quả
+            if result == "update_required" or remaining_time <= 0:
+                print("\nĐã đủ 30 phút, kết thúc tấn công boss...")
+                break  # Thoát vòng lặp tấn công
+            elif unattacked_count == 0:
+                print("\nĐã hết boss, kết thúc tấn công boss...")
+                break  # Thoát vòng lặp tấn công
+
+            time.sleep(1)
+
+    except Exception as e:
+        print(f"Lỗi khi tấn công boss trên {device_id}: {e}")
 
 
 def run_feature_with_retry(device, feature_choice, device_lock):
@@ -36,6 +113,9 @@ def run_feature_with_retry(device, feature_choice, device_lock):
             elif feature_choice == "3":
                 print(f"Bắt đầu auto tham gia War (không chọn tướng) trên {device['name']}...")
                 auto_join_rally(device['device_id'], use_general=False)  # Sử dụng rally với cờ không chọn tướng
+            elif feature_choice == "4":
+                print(f"Bắt đầu auto tấn công Boss trên {device['name']}...")
+                run_attack_boss_for_device(device['device_id'])
 
             # Reset số lần thử lại khi thành công
             retry_count = 0
@@ -94,7 +174,7 @@ def main():
         # Chọn tính năng một lần duy nhất
         while True:
             choice = show_feature_menu()
-            if choice in ["1", "2", "3"]:
+            if choice in ["1", "2", "3", "4"]:
                 break
             print("Lựa chọn không hợp lệ, vui lòng chọn lại!")
 
@@ -130,4 +210,3 @@ def main():
 
 if __name__ == "__main__":
     main()  # Bắt đầu chạy bot tự động
-    # auto_join_rally()  # Dòng này gây ra việc chạy thêm một lần nữa

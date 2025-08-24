@@ -76,7 +76,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
             for image_file in os.listdir(image_folder):
                 if image_file.endswith(('.jpg', '.JPG', '.png', '.PNG')):
                     image_name = os.path.splitext(image_file)[0]
-                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, 0.8):
+                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, 0.9):
                         print(f"Đã tìm thấy và click vào {boss_name}")
                         result = execute_attack_sequence(start_time, troops_count)  # Truyền số lượng quân
                         if result == "update_required":
@@ -163,7 +163,7 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
             "folder": "serpopard",
             "image_path": "images/buttons/attack/serpopard",
             "troops_count": "500000",
-            # "threshold": 0.8
+            # "threshold": 0.9
         }
     }
     

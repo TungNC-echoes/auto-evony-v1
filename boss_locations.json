@@ -1,280 +1,280 @@
 {
-    "last_updated": "2025-08-23 09:07:33",
+    "last_updated": "2025-08-24 11:07:23",
     "boss_count": 25,
     "bosses": [
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 48 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 75 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "547",
-                "Y": "568"
+                "X": "524",
+                "Y": "523"
             },
-            "timestamp": "2025-08-23 09:05:36",
+            "timestamp": "2025-08-24 11:00:19",
             "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 57 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 90 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "634",
-                "Y": "513"
-            },
-            "timestamp": "2025-08-23 09:05:36",
-            "attacked": 1
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 73 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "536",
-                "Y": "603"
-            },
-            "timestamp": "2025-08-23 09:05:36",
-            "attacked": 1
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 91 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "502",
+                "X": "501",
                 "Y": "553"
             },
-            "timestamp": "2025-08-23 09:05:36",
+            "timestamp": "2025-08-24 11:00:19",
             "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 105 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 132 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "533",
-                "Y": "466"
+                "X": "459",
+                "Y": "552"
             },
-            "timestamp": "2025-08-23 09:05:37",
+            "timestamp": "2025-08-24 11:00:19",
             "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 107 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 133 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "676",
-                "Y": "621"
+                "X": "471",
+                "Y": "503"
             },
-            "timestamp": "2025-08-23 09:05:37",
+            "timestamp": "2025-08-24 11:00:19",
             "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 109 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 180 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "692",
-                "Y": "595"
+                "X": "721",
+                "Y": "431"
             },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 127 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 180 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "700",
-                "Y": "485"
+                "X": "771",
+                "Y": "527"
             },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 135 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 189 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "595",
-                "Y": "690"
+                "X": "684",
+                "Y": "389"
             },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 145 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "559",
-                "Y": "694"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 146 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "737",
-                "Y": "554"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 151 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "741",
-                "Y": "566"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 162 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "710",
-                "Y": "665"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 164 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "754",
-                "Y": "533"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 167 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "682",
-                "Y": "415"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 168 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "760",
-                "Y": "575"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 173 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "749",
-                "Y": "484"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 176 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "768",
-                "Y": "535"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 179 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "424",
-                "Y": "619"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 187 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "458",
-                "Y": "685"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 188 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "543",
-                "Y": "734"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
-        },
-        {
-            "name": "Normal Serpopard",
-            "coordinates": "D 190 |\nQuái vật sự kiện Lv1\n| 25M",
-            "level": {
-                "S": "1973",
-                "X": "627",
-                "Y": "740"
-            },
-            "timestamp": "2025-08-23 09:05:37",
-            "attacked": 0
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
         },
         {
             "name": "Normal Serpopard",
             "coordinates": "D 191 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "772",
-                "Y": "487"
+                "X": "675",
+                "Y": "724"
             },
-            "timestamp": "2025-08-23 09:05:37",
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 215 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "387",
+                "Y": "484"
+            },
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 219 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "433",
+                "Y": "705"
+            },
+            "timestamp": "2025-08-24 11:00:19",
+            "attacked": 1
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 228 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "685",
+                "Y": "345"
+            },
+            "timestamp": "2025-08-24 11:00:19",
             "attacked": 0
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 192 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 234 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "752",
-                "Y": "449"
+                "X": "787",
+                "Y": "426"
             },
-            "timestamp": "2025-08-23 09:05:37",
+            "timestamp": "2025-08-24 11:00:20",
             "attacked": 0
         },
         {
             "name": "Normal Serpopard",
-            "coordinates": "D 196 |\nQuái vật sự kiện Lv1\n| 25M",
+            "coordinates": "D 237 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "423",
-                "Y": "650"
+                "X": "639",
+                "Y": "321"
             },
-            "timestamp": "2025-08-23 09:05:38",
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 239 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "711",
+                "Y": "347"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 242 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "788",
+                "Y": "696"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 245 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "711",
+                "Y": "340"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 253 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "355",
+                "Y": "464"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 257 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "844",
+                "Y": "600"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 257 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "355",
+                "Y": "450"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 258 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "590",
+                "Y": "813"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 261 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "444",
+                "Y": "339"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 264 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "730",
+                "Y": "330"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 268 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "574",
+                "Y": "820"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 268 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "478",
+                "Y": "796"
+            },
+            "timestamp": "2025-08-24 11:00:20",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 272 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "351",
+                "Y": "429"
+            },
+            "timestamp": "2025-08-24 11:00:20",
             "attacked": 0
         }
     ]
