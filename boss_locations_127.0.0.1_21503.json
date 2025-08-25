@@ -1,280 +1,280 @@
 {
-    "last_updated": "2025-08-18 03:53:59",
+    "last_updated": "2025-08-24 12:23:08",
     "boss_count": 25,
     "bosses": [
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 29 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 354 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "564",
-                "Y": "552"
+                "X": "946",
+                "Y": "572"
             },
-            "timestamp": "2025-08-18 03:53:56",
+            "timestamp": "2025-08-24 12:23:04",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 113 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 308 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "550",
-                "Y": "660"
+                "X": "866",
+                "Y": "416"
             },
-            "timestamp": "2025-08-18 03:53:56",
+            "timestamp": "2025-08-24 12:23:04",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 117 |\nQuái vật sự kiện Lv3\n| 74M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 582 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "480",
-                "Y": "518"
+                "X": "536",
+                "Y": "1134"
             },
-            "timestamp": "2025-08-18 03:53:56",
+            "timestamp": "2025-08-24 12:23:04",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 162 |\nQuái vật sự kiện Lv3\n| 74M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 282 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "680",
-                "Y": "692"
+                "X": "311",
+                "Y": "566"
             },
-            "timestamp": "2025-08-18 03:53:56",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 221 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "412",
-                "Y": "424"
-            },
-            "timestamp": "2025-08-18 03:53:56",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 239 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "678",
-                "Y": "332"
-            },
-            "timestamp": "2025-08-18 03:53:57",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 261 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "728",
-                "Y": "330"
-            },
-            "timestamp": "2025-08-18 03:53:57",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 286 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "820",
-                "Y": "381"
-            },
-            "timestamp": "2025-08-18 03:53:57",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 291 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 274 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
                 "X": "318",
-                "Y": "649"
+                "Y": "578"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 295 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 102 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "516",
-                "Y": "840"
+                "X": "686",
+                "Y": "512"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 345 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 359 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "310",
-                "Y": "754"
+                "X": "913",
+                "Y": "394"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 357 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 505 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "464",
-                "Y": "220"
+                "X": "134",
+                "Y": "338"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 362 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 426 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "502",
-                "Y": "202"
+                "X": "522",
+                "Y": "973"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 364 |\nQuái vật sự kiện Lv3\n| 74M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 408 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "570",
-                "Y": "918"
+                "X": "325",
+                "Y": "246"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 390 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 399 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "498",
-                "Y": "174"
+                "X": "320",
+                "Y": "262"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 410 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 159 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "480",
-                "Y": "950"
+                "X": "748",
+                "Y": "592"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 411 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 383 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "936",
-                "Y": "780"
+                "X": "811",
+                "Y": "240"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 419 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 274 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "368",
-                "Y": "906"
+                "X": "674",
+                "Y": "814"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 424 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 263 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "887",
-                "Y": "249"
+                "X": "671",
+                "Y": "806"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 425 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 487 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "876",
-                "Y": "238"
+                "X": "998",
+                "Y": "826"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 425 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 163 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "1014",
-                "Y": "510"
+                "X": "657",
+                "Y": "704"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 427 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 69 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "807",
-                "Y": "922"
+                "X": "586",
+                "Y": "484"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 429 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 222 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "588",
-                "Y": "982"
+                "X": "794",
+                "Y": "464"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 429 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 442 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "401",
-                "Y": "169"
+                "X": "760",
+                "Y": "964"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
             "attacked": 0
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 433 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Normal Serpopard",
+            "coordinates": "D 375 |\nQuái vật sự kiện Lv1\n| 25M",
             "level": {
                 "S": "1973",
-                "X": "753",
-                "Y": "955"
+                "X": "687",
+                "Y": "916"
             },
-            "timestamp": "2025-08-18 03:53:57",
+            "timestamp": "2025-08-24 12:23:05",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 309 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "678",
+                "Y": "849"
+            },
+            "timestamp": "2025-08-24 12:23:06",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 256 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "728",
+                "Y": "772"
+            },
+            "timestamp": "2025-08-24 12:23:06",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 252 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "730",
+                "Y": "764"
+            },
+            "timestamp": "2025-08-24 12:23:06",
+            "attacked": 0
+        },
+        {
+            "name": "Normal Serpopard",
+            "coordinates": "D 442 |\nQuái vật sự kiện Lv1\n| 25M",
+            "level": {
+                "S": "1973",
+                "X": "354",
+                "Y": "926"
+            },
+            "timestamp": "2025-08-24 12:23:06",
             "attacked": 0
         }
     ]
