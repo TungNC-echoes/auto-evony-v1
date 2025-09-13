@@ -28,6 +28,7 @@ def run_single_task_process(task, task_index, total_tasks, log_queue):
         feature_name = task['feature_name']
         device_id = device['device_id']
         
+        
         log_queue.put(f"🔄 [Task {task_index}/{total_tasks}] Bắt đầu {feature_name} trên {device['name']} (Device ID: {device_id})")
         
         # Thiết lập device
@@ -41,7 +42,9 @@ def run_single_task_process(task, task_index, total_tasks, log_queue):
         elif feature_code == "3":
             run_rally_direct_process(device_id, use_general=False, log_queue=log_queue)
         elif feature_code == "4":
-            run_attack_boss_direct_process(device_id, log_queue=log_queue)
+            # Get troops_count from task for attack_boss
+            troops_count = task.get('troops_count', 1000)  # Default fallback
+            run_attack_boss_direct_process(device_id, log_queue=log_queue, troops_count=troops_count)
         
         log_queue.put(f"✅ [Task {task_index}/{total_tasks}] Hoàn thành {feature_name} trên {device['name']}")
             
@@ -71,11 +74,11 @@ def run_buy_meat_direct_process(device_id, log_queue=None):
             log_queue.put(f"❌ Lỗi khi chạy auto buy meat trên {device_id}: {e}")
 
 
-def run_attack_boss_direct_process(device_id, log_queue=None):
+def run_attack_boss_direct_process(device_id, log_queue=None, troops_count=1000):
     """Chạy attack_boss trong process con với vòng lặp vô hạn giống attack_boss.py"""
     try:
         if log_queue:
-            log_queue.put(f"👹 Bắt đầu tấn công boss trên device {device_id}")
+            log_queue.put(f"👹 Bắt đầu tấn công boss trên device {device_id} với {troops_count} quân")
         
         # Import hàm từ get_location_boss (file cũ, an toàn)
         from actions.get_location_boss import get_boss_locations, save_to_json
@@ -143,8 +146,8 @@ def run_attack_boss_direct_process(device_id, log_queue=None):
                     if log_queue:
                         log_queue.put(f"⏱️ Còn {unattacked_count} boss, thời gian: {remaining_time}s")
                     
-                    # Thực hiện tấn công các boss đã chọn
-                    result = attack_selected_bosses(initial_selection, bosses, start_time)
+                    # Thực hiện tấn công các boss đã chọn với troops_count từ UI
+                    result = attack_selected_bosses(initial_selection, bosses, start_time, troops_count)
                     
                     # Kiểm tra kết quả
                     if result == "update_required" or remaining_time <= 0:

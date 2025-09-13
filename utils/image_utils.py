@@ -18,7 +18,7 @@ def find_button_on_screen(button_image_path, device_id=None, threshold=0.95):
         template = cv2.imread(button_image_path)
         if template is None:
             print(f"Không thể đọc ảnh mẫu: {button_image_path}")
-            return None
+            return None, 0.0
             
         # Chụp và đọc ảnh màn hình
         from utils.adb_utils import take_screenshot
@@ -34,7 +34,7 @@ def find_button_on_screen(button_image_path, device_id=None, threshold=0.95):
         screen = cv2.imread(screen_path)
         if screen is None:
             print(f"Không thể đọc ảnh màn hình: {screen_path}")
-            return None
+            return None, 0.0
             
         # Thêm xử lý ảnh để cải thiện độ chính xác
         screen_gray = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
@@ -81,7 +81,7 @@ def check_button_exists(button_name, device_id=None, threshold=0.95):
         print(f"Lỗi khi kiểm tra nút trên device {device_id}: {e}")
         return False
 
-def find_and_click_button(button_name, device_id=None, wait_time=1, max_retries=1, threshold = 0.95):
+def find_and_click_button(button_name, device_id=None, wait_time=1, max_retries=1, threshold=0.95):
     """Tìm và click vào nút với số lần thử lại"""
     for attempt in range(max_retries):
         try:

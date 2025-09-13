@@ -5,9 +5,6 @@ Handles device operations, drag & drop, and device state management
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-import subprocess
-import threading
-import time
 from utils.adb_utils import get_memu_devices
 
 
@@ -28,178 +25,6 @@ class DeviceManager:
             "war_no_general": [],
             "attack_boss": []
         }
-        
-        # Device-process mapping để track process của từng device
-        self.device_process_mapping = {
-            "rally": {},      # {device_id: process}
-            "buy_meat": {},
-            "war_no_general": {},
-            "attack_boss": {}
-        }
-    
-    def kill_specific_device_process(self, device_id, device_name, feature_key):
-        """Kill process của device cụ thể (không kill toàn bộ feature)"""
-        def kill_process():
-            try:
-                self.gui.log_status(f"🔄 Đang kill process cho {device_name} (ID: {device_id})...")
-                
-                # Tìm và kill process của device cụ thể từ mapping
-                if device_id in self.device_process_mapping[feature_key]:
-                    process = self.device_process_mapping[feature_key][device_id]
-                    
-                    try:
-                        if process.is_alive():
-                            self.gui.log_status(f"🔪 Đang kill process cho {device_name}...")
-                            process.terminate()
-                            process.join(timeout=3.0)
-                            if process.is_alive():
-                                process.kill()
-                                process.join(timeout=1.0)
-                            
-                            # Remove process từ mapping
-                            del self.device_process_mapping[feature_key][device_id]
-                            
-                            # Remove process từ feature_status
-                            if hasattr(self.gui, 'feature_status') and feature_key in self.gui.feature_status:
-                                feature_processes = self.gui.feature_status[feature_key]["processes"]
-                                if process in feature_processes:
-                                    feature_processes.remove(process)
-                            
-                            self.gui.log_status(f"✅ Đã kill process cho {device_name}")
-                        else:
-                            # Process đã chết, chỉ cần remove khỏi mapping
-                            del self.device_process_mapping[feature_key][device_id]
-                            self.gui.log_status(f"✅ Process cho {device_name} đã chết, đã remove khỏi mapping")
-                            
-                    except Exception as e:
-                        self.gui.log_status(f"⚠️ Lỗi khi kill process cho {device_name}: {e}")
-                        # Vẫn remove khỏi mapping nếu có lỗi
-                        if device_id in self.device_process_mapping[feature_key]:
-                            del self.device_process_mapping[feature_key][device_id]
-                else:
-                    self.gui.log_status(f"⚠️ Không tìm thấy process cho {device_name} trong mapping")
-                
-                # Kiểm tra nếu feature còn devices khác
-                remaining_devices = len(self.feature_devices[feature_key])
-                if remaining_devices <= 1:  # Chỉ còn device này hoặc không còn device nào
-                    # Dừng feature hoàn toàn
-                    if hasattr(self.gui, 'feature_status') and feature_key in self.gui.feature_status:
-                        if self.gui.feature_status[feature_key]["running"]:
-                            self.gui.feature_status[feature_key]["running"] = False
-                            
-                            # Kill tất cả processes còn lại
-                            feature_processes = self.gui.feature_status[feature_key]["processes"]
-                            for process in feature_processes:
-                                try:
-                                    if process.is_alive():
-                                        process.terminate()
-                                        process.join(timeout=1.0)
-                                        if process.is_alive():
-                                            process.kill()
-                                except:
-                                    pass
-                            
-                            # Clear process list và mapping
-                            feature_processes.clear()
-                            self.device_process_mapping[feature_key].clear()
-                            
-                            # Update UI
-                            try:
-                                start_button = getattr(self.gui, f"{feature_key}_start_button")
-                                stop_button = getattr(self.gui, f"{feature_key}_stop_button")
-                                status_label = getattr(self.gui, f"{feature_key}_status_label")
-                                
-                                start_button.config(state=tk.NORMAL)
-                                stop_button.config(state=tk.DISABLED)
-                                status_label.config(text="⏸️ Stopped")
-                            except:
-                                pass
-                            
-                            self.gui.log_status(f"⏹️ Feature {feature_key} đã dừng (không còn devices)")
-                        else:
-                            self.gui.log_status(f"✅ Đã kill process cho {device_name} từ {feature_key}")
-                    else:
-                        self.gui.log_status(f"✅ Đã kill process cho {device_name} từ {feature_key}")
-                else:
-                    # Feature vẫn tiếp tục chạy với devices còn lại
-                    self.gui.log_status(f"✅ Đã kill process cho {device_name}, {feature_key} vẫn chạy với {remaining_devices-1} devices")
-                
-            except Exception as e:
-                self.gui.log_status(f"❌ Lỗi khi kill device process: {e}")
-        
-        # Chạy kill process trong thread riêng để không block UI
-        kill_thread = threading.Thread(target=kill_process)
-        kill_thread.daemon = True
-        kill_thread.start()
-    
-    def auto_start_feature_for_device(self, device_id, device_name, feature_key):
-        """Tự động start feature cho device mới được thêm vào"""
-        def start_feature():
-            try:
-                # Đợi một chút để đảm bảo device đã được thêm vào feature
-                time.sleep(1.0)
-                
-                # Kiểm tra xem feature có đang chạy không
-                if hasattr(self.gui, 'feature_status') and feature_key in self.gui.feature_status:
-                    if self.gui.feature_status[feature_key]["running"]:
-                        self.gui.log_status(f"🚀 Tự động start {feature_key} cho {device_name}...")
-                        
-                        # Tạo task cho device mới
-                        device_info = {'device_id': device_id, 'name': device_name}
-                        
-                        # Map feature key to feature code
-                        feature_codes = {
-                            "rally": "1",
-                            "buy_meat": "2", 
-                            "war_no_general": "3",
-                            "attack_boss": "4"
-                        }
-                        
-                        feature_code = feature_codes.get(feature_key, "1")
-                        
-                        # Tạo task
-                        task = {
-                            'device': device_info,
-                            'feature_code': feature_code,
-                            'feature_name': feature_key
-                        }
-                        
-                        # Add troops_count for attack_boss feature
-                        if feature_key == "attack_boss":
-                            try:
-                                troops_count = int(self.gui.attack_boss_troops_var.get().strip())
-                                task['troops_count'] = troops_count
-                            except:
-                                task['troops_count'] = 1000  # Default fallback
-                        
-                        # Import process manager
-                        from components.process_manager import run_single_task_process
-                        import multiprocessing
-                        
-                        # Tạo process mới cho device này (sử dụng multiprocessing.Process)
-                        process = multiprocessing.Process(
-                            target=run_single_task_process,
-                            args=(task, 1, 1, self.gui.log_queue)
-                        )
-                        
-                        # Thêm process vào danh sách
-                        self.gui.feature_status[feature_key]["processes"].append(process)
-                        
-                        # Lưu process vào mapping để track theo device_id
-                        self.device_process_mapping[feature_key][device_id] = process
-                        
-                        # Start process
-                        process.start()
-                        
-                        self.gui.log_status(f"✅ Đã tự động start {feature_key} cho {device_name}")
-                        
-            except Exception as e:
-                self.gui.log_status(f"❌ Lỗi khi auto start feature: {e}")
-        
-        # Chạy auto start trong thread riêng
-        start_thread = threading.Thread(target=start_feature)
-        start_thread.daemon = True
-        start_thread.start()
     
     def refresh_devices(self):
         """Refresh danh sách devices - chỉ load những device chưa được assign"""
@@ -334,11 +159,6 @@ class DeviceManager:
             if show_log:
                 self.gui.log_status(f"✅ Đã thêm {device_name} vào {feature_key}")
             
-            #  AUTO START NẾU FEATURE ĐANG CHẠY
-            if hasattr(self.gui, 'feature_status') and feature_key in self.gui.feature_status:
-                if self.gui.feature_status[feature_key]["running"]:
-                    self.auto_start_feature_for_device(device_id, device_name, feature_key)
-            
             return True
         return False
     
@@ -354,10 +174,6 @@ class DeviceManager:
         """Clear tất cả devices trong một feature"""
         # Get all devices from this feature
         devices_to_restore = self.feature_devices[feature_key].copy()
-        
-        # Kill processes cho tất cả devices trong feature này
-        for device_info in devices_to_restore:
-            self.kill_specific_device_process(device_info['device_id'], device_info['name'], feature_key)
         
         # Clear feature devices
         self.feature_devices[feature_key].clear()
@@ -387,13 +203,8 @@ class DeviceManager:
             device_count = len(self.feature_devices[feature_key])
             total_restored += device_count
             
-            # Clear feature devices with kill processes
+            # Clear feature devices
             devices_to_restore = self.feature_devices[feature_key].copy()
-            
-            # Kill processes cho tất cả devices trong feature này
-            for device_info in devices_to_restore:
-                self.kill_specific_device_process(device_info['device_id'], device_info['name'], feature_key)
-            
             self.feature_devices[feature_key].clear()
             feature_tree = getattr(self.gui, f"{feature_key}_tree")
             for item in feature_tree.get_children():
@@ -415,15 +226,12 @@ class DeviceManager:
         self.gui.log_status(f"🗑️ Đã clear tất cả features và trả lại {total_restored} devices")
     
     def remove_device_from_feature(self, device_item, feature_key):
-        """Xóa device khỏi feature và trả về danh sách gốc - CHỈ KILL PROCESS CỦA DEVICE CỤ THỂ"""
+        """Xóa device khỏi feature và trả về danh sách gốc"""
         if device_item:
             # Get device info
             feature_tree = getattr(self.gui, f"{feature_key}_tree")
             device_id = feature_tree.item(device_item, "tags")[0]
             device_name = feature_tree.item(device_item, "values")[0]
-            
-            #  KILL PROCESS CỦA DEVICE CỤ THỂ (KHÔNG KILL TOÀN BỘ FEATURE)
-            self.kill_specific_device_process(device_id, device_name, feature_key)
             
             # Remove from feature
             self.feature_devices[feature_key] = [
@@ -445,15 +253,12 @@ class DeviceManager:
             self.gui.log_status(f"🔄 Đã trả {device_name} về danh sách gốc từ {feature_key}")
     
     def move_device_between_features(self, device_item, from_feature_key, to_feature_key):
-        """🔥 HOT SWAP: Di chuyển device từ feature này sang feature khác"""
+        """Di chuyển device từ feature này sang feature khác"""
         if device_item:
             # Get device info
             from_feature_tree = getattr(self.gui, f"{from_feature_key}_tree")
             device_id = from_feature_tree.item(device_item, "tags")[0]
             device_name = from_feature_tree.item(device_item, "values")[0]
-            
-            # 🔥 KILL PROCESS CỦA DEVICE CỤ THỂ TỪ FEATURE CŨ
-            self.kill_specific_device_process(device_id, device_name, from_feature_key)
             
             # Remove from source feature
             self.feature_devices[from_feature_key] = [
@@ -476,15 +281,7 @@ class DeviceManager:
             to_count_label = getattr(self.gui, f"{to_feature_key}_count_label")
             to_count_label.config(text=f"{len(self.feature_devices[to_feature_key])} devices")
             
-            # 🚀 AUTO START FEATURE MỚI NẾU ĐANG CHẠY
-            if hasattr(self.gui, 'feature_status') and to_feature_key in self.gui.feature_status:
-                if self.gui.feature_status[to_feature_key]["running"]:
-                    self.auto_start_feature_for_device(device_id, device_name, to_feature_key)
-                    self.gui.log_status(f"🔄 HOT SWAP: Đã chuyển {device_name} từ {from_feature_key} sang {to_feature_key} (auto start)")
-                else:
-                    self.gui.log_status(f"🔄 Đã chuyển {device_name} từ {from_feature_key} sang {to_feature_key}")
-            else:
-                self.gui.log_status(f"🔄 Đã chuyển {device_name} từ {from_feature_key} sang {to_feature_key}")
+            self.gui.log_status(f"🔄 Đã chuyển {device_name} từ {from_feature_key} sang {to_feature_key}")
     
     def add_all_selected_to_feature(self):
         """Thêm tất cả devices đã chọn vào feature được chọn từ dropdown"""

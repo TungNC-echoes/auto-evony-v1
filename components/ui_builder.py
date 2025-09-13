@@ -230,6 +230,29 @@ class UIBuilder:
         control_frame = ttk.Frame(container)
         control_frame.grid(row=2, column=0, sticky=(tk.W, tk.E), pady=(10, 0))
         
+        # Special input for attack_boss feature
+        if feature_key == "attack_boss":
+            # Input frame for troops count
+            input_frame = ttk.Frame(control_frame)
+            input_frame.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+            
+            # Troops count input
+            ttk.Label(input_frame, text="Troops:", style="Count.TLabel").pack(side=tk.LEFT, padx=(0, 5))
+            
+            troops_var = tk.StringVar()
+            troops_entry = ttk.Entry(input_frame, textvariable=troops_var, width=10, font=("Arial", 9))
+            troops_entry.pack(side=tk.LEFT, padx=(0, 5))
+            setattr(self.gui, f"{feature_key}_troops_var", troops_var)
+            setattr(self.gui, f"{feature_key}_troops_entry", troops_entry)
+            
+            # Validation label
+            validation_label = ttk.Label(input_frame, text="⚠️ Nhập số quân", style="Warning.TLabel")
+            validation_label.pack(side=tk.LEFT)
+            setattr(self.gui, f"{feature_key}_validation_label", validation_label)
+            
+            # Bind validation on input change
+            troops_var.trace('w', lambda *args: self.gui.validate_attack_boss_input())
+        
         # Start button for this feature
         start_button = ttk.Button(control_frame, text="▶️ Start", width=8,
                                  command=lambda: self.gui.start_feature(feature_key), 

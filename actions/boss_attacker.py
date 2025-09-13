@@ -10,9 +10,11 @@ from utils.adb_utils import adb_command, input_text, cancel_action
 from actions.boss_data_manager import save_boss_data
 from actions.war_actions import handle_insufficient_stamina
 
-def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_time=None):
+def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_time=None, threshold=0.8):
     """Tấn công boss với tên và tọa độ được cung cấp"""
     try:
+        print(f"🔍 Tìm kiếm: {boss_name} - {image_folder} - X:{x_coord}, Y:{y_coord}")
+        
         # Click vào nút location với tối đa 2 lần thử
         max_retries = 2
         location_retry_count = 0
@@ -76,8 +78,8 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
             for image_file in os.listdir(image_folder):
                 if image_file.endswith(('.jpg', '.JPG', '.png', '.PNG')):
                     image_name = os.path.splitext(image_file)[0]
-                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, 0.9):
-                        print(f"Đã tìm thấy và click vào {boss_name}")
+                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, threshold):
+                        print(f"✅ Tìm thấy: {boss_name} - {image_name}")
                         result = execute_attack_sequence(start_time, troops_count)  # Truyền số lượng quân
                         if result == "update_required":
                             return "update_required"
@@ -96,74 +98,80 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
         cancel_action()
         return False
 
-def attack_selected_bosses(selected_groups, bosses, start_time=None):
-    """Tấn công các boss đã chọn"""
+def attack_selected_bosses(selected_groups, bosses, start_time=None, troops_count=500000):
+    """Tấn công các boss đã chọn với troops_count từ UI"""      
     boss_types = {
         "Cerberus Cấp Thấp": {
             "folder": "cerberus", 
             "image_path": "images/buttons/attack/cerberus",
-            "troops_count": "600000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
             "image_path": "images/buttons/attack/pan_luc_quan",
-            "troops_count": "300000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Người đá": {
             "folder": "nguoi_da", 
             "image_path": "images/buttons/attack/nguoi_da",
-            "troops_count": "300000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Pan (Viễn Quân)": {
             "folder": "pan_vien_quan", 
             "image_path": "images/buttons/attack/pan_vien_quan",
-            "troops_count": "300000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Harp bình thường": {
             "folder": "harp",
             "image_path": "images/buttons/attack/harp",
-            "troops_count": "700000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Phù thủy": {
             "folder": "phu_thuy",
             "image_path": "images/buttons/attack/phu_thuy",
-            "troops_count": "500000"
-            # "threshold": 0.75
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.75
         },
         "Nhân Sư": {
             "folder": "nhan_su",
             "image_path": "images/buttons/attack/nhan_su",
-            "troops_count": "800000",
-            # "threshold": 0.75
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.75
         },
         "Rùa Nham thạch": {
             "folder": "rua",
             "image_path": "images/buttons/attack/rua",
-            "troops_count": "900000"
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.7
         },
         "Ymir": {
             "folder": "ymir",
             "image_path": "images/buttons/attack/ymir",
-            "troops_count": "50000",
-            # "threshold": 0.8
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.8
         },
         "Lãnh chúa": {
             "folder": "lanh_chua",
             "image_path": "images/buttons/attack/lanh_chua",
-            "troops_count": "700000",
-            # "threshold": 0.75-0.8
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.75
         },
         "Hiệp sĩ Cấp thấp Bayard": {
             "folder": "bayard",
             "image_path": "images/buttons/attack/Bayard",
-            "troops_count": "700000",
-            # "threshold": 0.8
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.8
         },
         "Normal Serpopard": {
             "folder": "serpopard",
             "image_path": "images/buttons/attack/serpopard",
-            "troops_count": "500000",
-            # "threshold": 0.9
+            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "threshold": 0.9
         }
     }
     
@@ -172,7 +180,7 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
         boss_info = next((info for name, info in boss_types.items() if name in boss_name), None)
         
         if boss_info:
-            print(f"\nĐang tấn công {boss_name}...")
+            print(f"\n🎯 {boss_name} - {boss_info['folder']} - Tọa độ: {group[0][1]['level']['X']},{group[0][1]['level']['Y']}")
             for idx, boss in group:
                 if not boss.get('attacked', 0):
                     result = attack_boss(boss_info['folder'], 
@@ -180,13 +188,14 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None):
                                       boss['level']['Y'], 
                                       boss_info['image_path'],
                                       boss_info['troops_count'],  # Thêm số lượng quân
-                                      start_time)
+                                      start_time,
+                                      boss_info.get('threshold', 0.7))  # Sử dụng threshold từ boss_info
                     if result == "update_required":
                         return "update_required"
                     elif result:
-                        print(f"Tấn công thành công boss tại tọa độ X:{boss['level']['X']}, Y:{boss['level']['Y']}")
+                        print(f"✅ Thành công: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
                     else:
-                        print(f"Không tìm thấy boss tại tọa độ X:{boss['level']['X']}, Y:{boss['level']['Y']}")
+                        print(f"❌ Thất bại: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
                     boss['attacked'] = 1
                     save_boss_data(bosses)
                     time.sleep(1)

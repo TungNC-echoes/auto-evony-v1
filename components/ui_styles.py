@@ -113,3 +113,15 @@ def setup_styles():
     style.map("Clear.TButton",
              background=[("active", "#c0392b"), ("pressed", "#a93226")],
              foreground=[("active", "white"), ("pressed", "white")])
+    
+    # Warning label style
+    style.configure("Warning.TLabel",
+                   font=("Arial", 8),
+                   foreground="#e74c3c",
+                   background="#ffffff")
+    
+    # Success label style
+    style.configure("Success.TLabel",
+                   font=("Arial", 8),
+                   foreground="#27ae60",
+                   background="#ffffff")

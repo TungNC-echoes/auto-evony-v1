@@ -7,6 +7,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import threading
 import multiprocessing
+import time
 from datetime import datetime
 
 # Import components
@@ -45,6 +46,9 @@ class DragDropGUI:
         
         # Start UI update timer to handle button states
         self.update_ui_states()
+        
+        # Initialize attack_boss troops validation
+        self.attack_boss_troops_valid = False
     
 
     
@@ -230,6 +234,12 @@ class DragDropGUI:
             messagebox.showwarning("Cảnh báo", "Đang chạy 'Bắt Đầu Tất Cả'. Vui lòng dừng nó trước!")
             return
         
+        # Special validation for attack_boss feature
+        if feature_key == "attack_boss":
+            if not self.attack_boss_troops_valid:
+                messagebox.showwarning("Cảnh báo", "Vui lòng nhập số lượng quân hợp lệ cho Attack Boss!")
+                return
+        
         # Confirm before starting
         feature_names = {
             "rally": "⚔️ Auto Rally",
@@ -271,14 +281,25 @@ class DragDropGUI:
         # Stop feature
         self.feature_status[feature_key]["running"] = False
         
-        # Wait for processes to finish
-        for process in self.feature_status[feature_key]["processes"]:
-            if process.is_alive():
-                process.join(timeout=1.0)
+        # Wait for processes to finish with better cleanup
+        processes_to_cleanup = self.feature_status[feature_key]["processes"].copy()
+        for process in processes_to_cleanup:
+            try:
                 if process.is_alive():
+                    # Try graceful termination first
                     process.terminate()
+                    process.join(timeout=2.0)
+                    
+                    # Force kill if still alive
+                    if process.is_alive():
+                        process.kill()
+                        process.join(timeout=1.0)
+            except Exception as e:
+                self.log_status(f"⚠️ Lỗi khi dừng process trong {feature_key}: {e}")
         
+        # Clear process list và mapping
         self.feature_status[feature_key]["processes"].clear()
+        self.device_manager.device_process_mapping[feature_key].clear()
         
         # Update UI
         start_button = getattr(self, f"{feature_key}_start_button")
@@ -316,12 +337,22 @@ class DragDropGUI:
             # Create tasks for this feature
             tasks = []
             for device in devices:
-                tasks.append({
+                task = {
                     'device': device,
                     'feature_code': feature_code,
                     'feature_name': feature_name,
                     'feature_key': feature_key
-                })
+                }
+                
+                # Add troops_count for attack_boss feature
+                if feature_key == "attack_boss":
+                    try:
+                        troops_count = int(self.attack_boss_troops_var.get().strip())
+                        task['troops_count'] = troops_count
+                    except:
+                        task['troops_count'] = 1000  # Default fallback
+                
+                tasks.append(task)
             
             # Start processes for each task
             processes = []
@@ -335,20 +366,46 @@ class DragDropGUI:
                 )
                 processes.append(process)
                 self.feature_status[feature_key]["processes"].append(process)
+                
+                # Lưu process vào mapping để track theo device_id
+                device_id = task['device']['device_id']
+                self.device_manager.device_process_mapping[feature_key][device_id] = process
             
             # Start all processes
             for process in processes:
                 if self.feature_status[feature_key]["running"]:
                     process.start()
             
-            # Wait for all processes to complete
-            for process in processes:
-                if process.is_alive():
-                    process.join()
+            # Monitor processes without blocking - use a separate thread
+            def monitor_processes():
+                try:
+                    # Wait for all processes to complete, but check running status periodically
+                    while self.feature_status[feature_key]["running"]:
+                        all_completed = True
+                        for process in processes:
+                            if process.is_alive():
+                                all_completed = False
+                                break
+                        
+                        if all_completed:
+                            break
+                        
+                        # Check every 1 second
+                        time.sleep(1)
+                    
+                    # Update UI when complete (only if feature is still running)
+                    if self.feature_status[feature_key]["running"]:
+                        self.root.after(0, self.reset_feature_ui, feature_key)
+                        
+                except Exception as e:
+                    self.log_status(f"❌ Lỗi trong monitor processes cho {feature_key}: {e}")
+                    if self.feature_status[feature_key]["running"]:
+                        self.root.after(0, self.reset_feature_ui, feature_key)
             
-            # Update UI when complete
-            if self.feature_status[feature_key]["running"]:
-                self.root.after(0, self.reset_feature_ui, feature_key)
+            # Start monitoring in a separate thread
+            monitor_thread = threading.Thread(target=monitor_processes)
+            monitor_thread.daemon = True
+            monitor_thread.start()
                 
         except Exception as e:
             self.log_status(f"❌ Lỗi trong {feature_key}: {e}")
@@ -498,6 +555,41 @@ class DragDropGUI:
         """Kiểm tra xem có feature nào đang chạy không"""
         return any(status["running"] for status in self.feature_status.values()) or self.is_running
     
+    def validate_attack_boss_input(self):
+        """Validate troops count input for attack_boss feature"""
+        try:
+            troops_text = self.attack_boss_troops_var.get().strip()
+            validation_label = self.attack_boss_validation_label
+            start_button = self.attack_boss_start_button
+            
+            if not troops_text:
+                # Empty input
+                validation_label.config(text="⚠️ Nhập số quân", style="Warning.TLabel")
+                self.attack_boss_troops_valid = False
+                start_button.config(state=tk.DISABLED)
+            else:
+                try:
+                    troops_count = int(troops_text)
+                    if troops_count <= 0:
+                        # Invalid number
+                        validation_label.config(text="⚠️ Số quân > 0", style="Warning.TLabel")
+                        self.attack_boss_troops_valid = False
+                        start_button.config(state=tk.DISABLED)
+                    else:
+                        # Valid input
+                        validation_label.config(text="✅ OK", style="Success.TLabel")
+                        self.attack_boss_troops_valid = True
+                        # Enable start button if feature is not running and has devices
+                        if not self.feature_status["attack_boss"]["running"] and len(self.device_manager.feature_devices["attack_boss"]) > 0:
+                            start_button.config(state=tk.NORMAL)
+                except ValueError:
+                    # Not a number
+                    validation_label.config(text="⚠️ Nhập số hợp lệ", style="Warning.TLabel")
+                    self.attack_boss_troops_valid = False
+                    start_button.config(state=tk.DISABLED)
+        except Exception as e:
+            self.log_status(f"❌ Lỗi validation: {e}")
+    
     def update_ui_states(self):
         """Cập nhật trạng thái UI để tránh conflict"""
         try:
@@ -518,7 +610,18 @@ class DragDropGUI:
                 for feature_key, status in self.feature_status.items():
                     start_button = getattr(self, f"{feature_key}_start_button", None)
                     if start_button and not status["running"]:
-                        start_button.config(state=tk.NORMAL)
+                        # Special handling for attack_boss validation
+                        if feature_key == "attack_boss":
+                            if self.attack_boss_troops_valid and len(self.device_manager.feature_devices["attack_boss"]) > 0:
+                                start_button.config(state=tk.NORMAL)
+                            else:
+                                start_button.config(state=tk.DISABLED)
+                        else:
+                            # Other features - enable if has devices
+                            if len(self.device_manager.feature_devices[feature_key]) > 0:
+                                start_button.config(state=tk.NORMAL)
+                            else:
+                                start_button.config(state=tk.DISABLED)
             
         except Exception as e:
             pass  # Ignore errors in UI updates
