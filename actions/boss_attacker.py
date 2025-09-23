@@ -98,109 +98,215 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
         cancel_action()
         return False
 
-def attack_selected_bosses(selected_groups, bosses, start_time=None, troops_count=500000):
-    """Tấn công các boss đã chọn với troops_count từ UI"""      
-    boss_types = {
+def check_image_folder_exists(image_path):
+    """Kiểm tra xem thư mục ảnh có tồn tại không"""
+    return os.path.exists(image_path)
+
+def list_boss_support_status(bosses_data):
+    """Liệt kê trạng thái hỗ trợ của tất cả các loại boss trong dữ liệu"""
+    print("\n" + "="*60)
+    print("📊 TRẠNG THÁI HỖ TRỢ CÁC LOẠI BOSS")
+    print("="*60)
+    
+    # Lấy danh sách unique các loại boss
+    unique_bosses = {}
+    for boss in bosses_data.get('bosses', []):
+        boss_name = boss['name']
+        if boss_name not in unique_bosses:
+            unique_bosses[boss_name] = {
+                'count': 1,
+                'attacked': boss.get('attacked', 0)
+            }
+        else:
+            unique_bosses[boss_name]['count'] += 1
+            if boss.get('attacked', 0):
+                unique_bosses[boss_name]['attacked'] += 1
+    
+    # Kiểm tra trạng thái hỗ trợ cho từng loại boss
+    for boss_name, info in unique_bosses.items():
+        boss_config = get_boss_config(boss_name)
+        
+        if boss_config.get('is_fallback', False):
+            status_icon = "❌"
+            status_text = "BỎ QUA (chưa hỗ trợ)"
+        else:
+            status_icon = "✅"
+            status_text = "SẼ TẤN CÔNG"
+        
+        folder_status = "📁" if boss_config.get('folder_exists', True) else "❌"
+        
+        print(f"{status_icon} {boss_name} - {status_text}")
+        print(f"   📊 Số lượng: {info['count']} | Đã tấn công: {info['attacked']}")
+        print(f"   {folder_status} Thư mục: {boss_config['image_path']}")
+        print(f"   🎯 Threshold: {boss_config['threshold']}")
+        
+        if boss_config.get('is_fallback', False):
+            print(f"   ⚠️  Boss này sẽ bị bỏ qua vì chưa được định nghĩa")
+        print()
+    
+    print("="*60)
+    print("📝 CHÚ THÍCH:")
+    print("✅ = Boss được định nghĩa sẵn - SẼ TẤN CÔNG")
+    print("❌ = Boss chưa được định nghĩa - BỎ QUA")
+    print("📁 = Thư mục ảnh tồn tại")
+    print("❌ = Thư mục ảnh không tồn tại")
+    print("="*60)
+
+def get_boss_config(boss_name, troops_count=500000):
+    """Lấy cấu hình cho boss dựa trên tên, với fallback cho các boss chưa được định nghĩa cụ thể"""
+    
+    # Dictionary chính cho các boss đã được định nghĩa cụ thể
+    specific_boss_types = {
         "Cerberus Cấp Thấp": {
             "folder": "cerberus", 
             "image_path": "images/buttons/attack/cerberus",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
             "image_path": "images/buttons/attack/pan_luc_quan",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Người đá": {
             "folder": "nguoi_da", 
             "image_path": "images/buttons/attack/nguoi_da",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Viễn Quân)": {
             "folder": "pan_vien_quan", 
             "image_path": "images/buttons/attack/pan_vien_quan",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Harp bình thường": {
             "folder": "harp",
             "image_path": "images/buttons/attack/harp",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Phù thủy": {
             "folder": "phu_thuy",
             "image_path": "images/buttons/attack/phu_thuy",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Nhân Sư": {
             "folder": "nhan_su",
             "image_path": "images/buttons/attack/nhan_su",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Rùa Nham thạch": {
             "folder": "rua",
             "image_path": "images/buttons/attack/rua",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Ymir": {
             "folder": "ymir",
             "image_path": "images/buttons/attack/ymir",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Lãnh chúa": {
             "folder": "lanh_chua",
             "image_path": "images/buttons/attack/lanh_chua",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Hiệp sĩ Cấp thấp Bayard": {
             "folder": "bayard",
             "image_path": "images/buttons/attack/Bayard",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Normal Serpopard": {
             "folder": "serpopard",
             "image_path": "images/buttons/attack/serpopard",
-            "troops_count": str(troops_count),  # Sử dụng troops_count từ UI
+            "troops_count": str(troops_count),
             "threshold": 0.9
         }
     }
     
+    # Kiểm tra xem boss có được định nghĩa cụ thể không
+    if boss_name in specific_boss_types:
+        config = specific_boss_types[boss_name].copy()
+        config['is_fallback'] = False  # Đánh dấu đây là boss đã định nghĩa sẵn
+        config['folder_exists'] = check_image_folder_exists(config['image_path'])
+        return config
+    
+    # Fallback: Tạo cấu hình động dựa trên tên boss
+    # Loại bỏ các ký tự đặc biệt và tạo folder name
+    clean_name = boss_name.replace("(", "").replace(")", "").replace(" ", "_").lower()
+    clean_name = clean_name.replace("trùm_quái_vật_", "").replace("trùm_", "")
+    
+    # Tạo đường dẫn ảnh dựa trên tên đã làm sạch
+    image_path = f"images/buttons/attack/{clean_name}"
+    
+    # Kiểm tra xem thư mục ảnh có tồn tại không
+    folder_exists = check_image_folder_exists(image_path)
+    
+    config = {
+        "folder": clean_name,
+        "image_path": image_path,
+        "troops_count": str(troops_count),
+        "threshold": 0.7,  # Threshold mặc định
+        "folder_exists": folder_exists,
+        "is_fallback": True  # Đánh dấu đây là cấu hình fallback
+    }
+    
+    if not folder_exists:
+        print(f"⚠️  Cảnh báo: Thư mục ảnh không tồn tại: {image_path}")
+        print(f"   Boss '{boss_name}' sẽ sử dụng cấu hình fallback")
+        print(f"   Vui lòng tạo thư mục và thêm ảnh boss vào: {image_path}")
+    
+    return config
+
+def attack_selected_bosses(selected_groups, bosses, start_time=None, troops_count=500000):
+    """Tấn công các boss đã chọn với troops_count từ UI"""
+    
     for group in selected_groups:
         boss_name = group[0][1]['name']
-        boss_info = next((info for name, info in boss_types.items() if name in boss_name), None)
+        # Sử dụng hàm get_boss_config mới để lấy cấu hình cho boss
+        boss_info = get_boss_config(boss_name, troops_count)
         
-        if boss_info:
-            print(f"\n🎯 {boss_name} - {boss_info['folder']} - Tọa độ: {group[0][1]['level']['X']},{group[0][1]['level']['Y']}")
-            for idx, boss in group:
-                if not boss.get('attacked', 0):
-                    result = attack_boss(boss_info['folder'], 
-                                      boss['level']['X'], 
-                                      boss['level']['Y'], 
-                                      boss_info['image_path'],
-                                      boss_info['troops_count'],  # Thêm số lượng quân
-                                      start_time,
-                                      boss_info.get('threshold', 0.7))  # Sử dụng threshold từ boss_info
-                    if result == "update_required":
-                        return "update_required"
-                    elif result:
-                        print(f"✅ Thành công: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
-                    else:
-                        print(f"❌ Thất bại: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
-                    boss['attacked'] = 1
-                    save_boss_data(bosses)
-                    time.sleep(1)
-        else:
-            print(f"Chưa hỗ trợ tấn công loại boss: {boss_name}")
+        # Kiểm tra xem boss có được định nghĩa sẵn không
+        if boss_info.get('is_fallback', False):
+            # Boss chưa được định nghĩa - bỏ qua và hiện cảnh báo
+            print(f"\n⚠️  BỎ QUA BOSS CHƯA ĐƯỢC HỖ TRỢ: {boss_name}")
+            print(f"   Tọa độ: {group[0][1]['level']['X']},{group[0][1]['level']['Y']}")
+            print(f"   Boss này chưa được định nghĩa trong danh sách hỗ trợ")
+            print(f"   Vui lòng thêm cấu hình cho boss này trong specific_boss_types")
+            print(f"   Hoặc tạo thư mục ảnh: {boss_info['image_path']}")
+            continue  # Bỏ qua boss này, chuyển sang boss tiếp theo
+        
+        # Boss đã được định nghĩa sẵn - tiến hành tấn công
+        print(f"\n🎯 {boss_name} - {boss_info['folder']} - Tọa độ: {group[0][1]['level']['X']},{group[0][1]['level']['Y']}")
+        print(f"📁 Đường dẫn ảnh: {boss_info['image_path']}")
+        print(f"🎯 Threshold: {boss_info['threshold']}")
+        print(f"✅ Sử dụng cấu hình được định nghĩa sẵn")
+        
+        for idx, boss in group:
+            if not boss.get('attacked', 0):
+                result = attack_boss(boss_info['folder'], 
+                                  boss['level']['X'], 
+                                  boss['level']['Y'], 
+                                  boss_info['image_path'],
+                                  boss_info['troops_count'],
+                                  start_time,
+                                  boss_info.get('threshold', 0.7))
+                if result == "update_required":
+                    return "update_required"
+                elif result:
+                    print(f"✅ Thành công: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
+                else:
+                    print(f"❌ Thất bại: {boss_name} - {boss_info['folder']} - X:{boss['level']['X']}, Y:{boss['level']['Y']}")
+                boss['attacked'] = 1
+                save_boss_data(bosses)
+                time.sleep(1)
 
 def execute_attack_sequence(start_time=None, troops_count="300000"):
     """Thực hiện chuỗi hành động tấn công sau khi chọn boss"""
