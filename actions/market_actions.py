@@ -8,13 +8,12 @@ from utils.image_utils import check_button_exists, find_and_click_button, find_a
 
 # Lấy đường dẫn tuyệt đối đến thư mục gốc
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMAGES_DIR = os.path.join(BASE_DIR, "images", "buttons")
 
 def is_in_black_market(device_id=None):
     """Kiểm tra xem đã ở trong chợ đen chưa"""
     try:
         print("Đang kiểm tra xem có ở trong chợ đen không...")
-        if check_button_exists(os.path.join("market", "cho_den"), device_id=device_id):
+        if check_button_exists("market/cho_den", device_id=device_id):
             print("Đã xác nhận đang ở trong chợ đen")
             return True
         else:
