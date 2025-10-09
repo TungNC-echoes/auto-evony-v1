@@ -26,7 +26,8 @@ class DeviceManager:
             "rally": [],
             "buy_meat": [],
             "war_no_general": [],
-            "attack_boss": []
+            "attack_boss": [],
+            "open_items": []
         }
         
         # Device-process mapping để track process của từng device
@@ -34,7 +35,8 @@ class DeviceManager:
             "rally": {},      # {device_id: process}
             "buy_meat": {},
             "war_no_general": {},
-            "attack_boss": {}
+            "attack_boss": {},
+            "open_items": {}
         }
     
     def kill_specific_device_process(self, device_id, device_name, feature_key):
@@ -493,19 +495,31 @@ class DeviceManager:
             self.gui.log_status("⚠️ Vui lòng chọn ít nhất 1 device trước!")
             return
         
-        # Map dropdown selection to feature key
+        # Map dropdown selection to feature key (updated for compact format)
         feature_mapping = {
+            "⚔️ Rally": "rally",
+            "🛒 Buy Meat": "buy_meat", 
+            "🎯 War": "war_no_general",
+            "👹 Attack Boss": "attack_boss",
+            "📦 Open Items": "open_items",
+            # Keep old format for backward compatibility
             "⚔️ Auto Rally": "rally",
             "🛒 Auto Buy Meat": "buy_meat", 
             "🎯 Auto War (No General)": "war_no_general",
-            "👹 Auto Attack Boss": "attack_boss"
+            "👹 Auto Attack Boss": "attack_boss",
+            "📦 Auto Open Items": "open_items"
         }
         
         selected_feature = self.gui.feature_var.get()
         feature_key = feature_mapping.get(selected_feature)
         
+        # Debug: Log selected feature
+        self.gui.log_status(f"🔍 Selected feature: '{selected_feature}'")
+        self.gui.log_status(f"🔍 Available mappings: {list(feature_mapping.keys())}")
+        
         if not feature_key:
             self.gui.log_status("❌ Vui lòng chọn feature từ dropdown!")
+            self.gui.log_status(f"❌ Không tìm thấy mapping cho: '{selected_feature}'")
             return
         
         added_count = 0

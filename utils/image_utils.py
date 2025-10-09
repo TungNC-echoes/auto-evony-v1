@@ -2,6 +2,7 @@ import cv2
 import os
 import time
 import numpy as np
+from utils.language_utils import get_image_path
 
 def get_screenshot_filename(device_id=None):
     """Tạo tên file screenshot với device_id"""
@@ -64,16 +65,30 @@ def find_button_on_screen(button_image_path, device_id=None, threshold=0.95):
 
 def check_button_exists(button_name, device_id=None, threshold=0.95):
     """Kiểm tra xem nút có tồn tại trên màn hình không"""
+    # Giảm threshold cho các button rally cụ thể
+    if button_name in ["chon", "hanh_quan"]:
+        threshold = 0.65
+        print(f"🔍 Rally button '{button_name}': Using lower threshold {threshold}")
+    
     try:
-        # Xử lý đường dẫn ảnh
+        # Xử lý đường dẫn ảnh với language support
         if isinstance(button_name, tuple):
-            button_path = os.path.join("./images/buttons", *button_name) + ".JPG"
+            base_path = "/".join(button_name)
         else:
-            button_path = os.path.join("./images/buttons", button_name) + ".JPG"
-            
-        if not os.path.exists(button_path):
-            print(f"Không tìm thấy ảnh nút {button_path}")
-            return False
+            base_path = button_name
+        
+        # Get language-aware path
+        button_path = get_image_path(f"buttons/{base_path}")
+        
+        # Try different extensions
+        if not os.path.exists(f"{button_path}.JPG"):
+            if not os.path.exists(f"{button_path}.jpg"):
+                print(f"Không tìm thấy ảnh nút {button_path}")
+                return False
+            else:
+                button_path = f"{button_path}.jpg"
+        else:
+            button_path = f"{button_path}.JPG"
             
         button_pos = find_button_on_screen(button_path, device_id, threshold)
         return button_pos is not None
@@ -83,14 +98,32 @@ def check_button_exists(button_name, device_id=None, threshold=0.95):
 
 def find_and_click_button(button_name, device_id=None, wait_time=1, max_retries=1, threshold=0.95):
     """Tìm và click vào nút với số lần thử lại"""
+    # Giảm threshold cho các button rally cụ thể
+    if button_name in ["chon", "hanh_quan"]:
+        threshold = 0.65
+        print(f"🔍 Rally button '{button_name}': Using lower threshold {threshold}")
+    
     for attempt in range(max_retries):
         try:
             print(f"Đang tìm nút {button_name} trên device {device_id}... (Lần thử {attempt + 1}/{max_retries})")
-            # Tìm nút trong thư mục buttons
-            button_path = f"./images/buttons/{button_name}.JPG"
-            if not os.path.exists(button_path):
-                print(f"Không tìm thấy ảnh nút {button_name}")
-                return False
+            # Tìm nút với language support
+            if isinstance(button_name, tuple):
+                base_path = "/".join(button_name)
+            else:
+                base_path = button_name
+            
+            # Get language-aware path
+            button_path = get_image_path(f"buttons/{base_path}")
+            
+            # Try different extensions
+            if not os.path.exists(f"{button_path}.JPG"):
+                if not os.path.exists(f"{button_path}.jpg"):
+                    print(f"Không tìm thấy ảnh nút {button_path}")
+                    return False
+                else:
+                    button_path = f"{button_path}.jpg"
+            else:
+                button_path = f"{button_path}.JPG"
                 
             # Tìm vị trí nút trên màn hình
             button_pos = find_button_on_screen(button_path, device_id, threshold)

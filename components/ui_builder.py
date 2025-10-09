@@ -5,7 +5,9 @@ Handles the creation and setup of the main GUI interface
 
 import tkinter as tk
 from tkinter import ttk
+import os
 from components.ui_styles import setup_styles
+from utils.language_utils import set_language, get_current_language, get_available_languages
 
 
 class UIBuilder:
@@ -22,10 +24,11 @@ class UIBuilder:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        # Configure grid weights
+        # Configure grid weights - thu nhỏ left panel, mở rộng right panel
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
-        main_frame.columnconfigure(1, weight=1)
+        main_frame.columnconfigure(0, weight=1)  # Left panel - thu nhỏ
+        main_frame.columnconfigure(1, weight=3)  # Right panel - mở rộng
         main_frame.rowconfigure(1, weight=1)
         
         # Title with gradient effect
@@ -37,41 +40,45 @@ class UIBuilder:
                                font=("Arial", 18, "bold"), style="Title.TLabel")
         title_label.grid(row=0, column=0)
         
-        # Left panel - Device list
-        left_panel = ttk.LabelFrame(main_frame, text="📱 Danh Sách Devices", padding="10", style="Panel.TLabelframe")
+        # Left panel - Device list (thu nhỏ)
+        left_panel = ttk.LabelFrame(main_frame, text="📱 Devices", padding="8", style="Panel.TLabelframe")
         left_panel.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S), padx=(0, 10))
         left_panel.columnconfigure(0, weight=1)
         left_panel.rowconfigure(1, weight=1)
         
-        # Device list buttons with better styling
+        # Device list buttons - 1 dòng compact
         device_buttons_frame = ttk.Frame(left_panel)
-        device_buttons_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 10))
+        device_buttons_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 8))
         
-        ttk.Button(device_buttons_frame, text="🔄 Refresh", 
-                  command=self.gui.device_manager.refresh_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(device_buttons_frame, text="🔄 Refresh All", 
-                  command=self.gui.device_manager.refresh_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(device_buttons_frame, text="📋 Select All", 
-                  command=self.gui.device_manager.select_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(device_buttons_frame, text="❌ Clear All", 
-                  command=self.gui.device_manager.clear_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 5))
+        # Row 1: Basic buttons
+        row1_frame = ttk.Frame(device_buttons_frame)
+        row1_frame.pack(fill=tk.X, pady=(0, 5))
         
-        # Add All Selected to Feature dropdown
-        self.gui.add_all_frame = ttk.Frame(device_buttons_frame)
-        self.gui.add_all_frame.pack(side=tk.LEFT, padx=(10, 0))
+        ttk.Button(row1_frame, text="🔄 Refresh", 
+                  command=self.gui.device_manager.refresh_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 3))
+        ttk.Button(row1_frame, text="🔄 All", 
+                  command=self.gui.device_manager.refresh_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 3))
+        ttk.Button(row1_frame, text="📋 Select", 
+                  command=self.gui.device_manager.select_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 3))
+        ttk.Button(row1_frame, text="❌ Clear", 
+                  command=self.gui.device_manager.clear_all_devices, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 3))
         
-        ttk.Label(self.gui.add_all_frame, text="Add to:", style="Count.TLabel").pack(side=tk.LEFT, padx=(0, 5))
+        # Row 2: Add to feature dropdown - compact
+        row2_frame = ttk.Frame(device_buttons_frame)
+        row2_frame.pack(fill=tk.X)
         
-        # Create dropdown for feature selection
+        ttk.Label(row2_frame, text="Add to:", style="Count.TLabel").pack(side=tk.LEFT, padx=(0, 3))
+        
+        # Create dropdown for feature selection - compact
         self.gui.feature_var = tk.StringVar()
-        feature_dropdown = ttk.Combobox(self.gui.add_all_frame, textvariable=self.gui.feature_var, 
-                                       values=["⚔️ Auto Rally", "🛒 Auto Buy Meat", "🎯 Auto War (No General)", "👹 Auto Attack Boss"],
-                                       state="readonly", width=25)
-        feature_dropdown.pack(side=tk.LEFT, padx=(0, 5))
-        feature_dropdown.set("⚔️ Auto Rally")  # Default selection
+        feature_dropdown = ttk.Combobox(row2_frame, textvariable=self.gui.feature_var, 
+                                       values=["⚔️ Rally", "🛒 Buy Meat", "🎯 War", "👹 Attack Boss", "📦 Open Items"],
+                                       state="readonly", width=15)
+        feature_dropdown.pack(side=tk.LEFT, padx=(0, 3))
+        feature_dropdown.set("⚔️ Rally")  # Default selection
         
         # Add button
-        ttk.Button(self.gui.add_all_frame, text="➕ Add All", 
+        ttk.Button(row2_frame, text="➕ Add", 
                   command=self.gui.device_manager.add_all_selected_to_feature, style="Action.TButton").pack(side=tk.LEFT)
         
         # Device list with scrollbar
@@ -80,16 +87,16 @@ class UIBuilder:
         device_list_frame.columnconfigure(0, weight=1)
         device_list_frame.rowconfigure(0, weight=1)
         
-        # Create Treeview for devices with custom style
+        # Create Treeview for devices - compact
         columns = ("Device", "Status")
-        self.gui.device_tree = ttk.Treeview(device_list_frame, columns=columns, show="headings", height=15, style="Device.Treeview")
+        self.gui.device_tree = ttk.Treeview(device_list_frame, columns=columns, show="headings", height=4, style="Device.Treeview")
         
-        # Configure columns
-        self.gui.device_tree.heading("Device", text="Device Name")
+        # Configure columns - thu nhỏ
+        self.gui.device_tree.heading("Device", text="Device")
         self.gui.device_tree.heading("Status", text="Status")
         
-        self.gui.device_tree.column("Device", width=200)
-        self.gui.device_tree.column("Status", width=100)
+        self.gui.device_tree.column("Device", width=120)  # Thu nhỏ
+        self.gui.device_tree.column("Status", width=60)   # Thu nhỏ
         
         # Scrollbar for device list
         device_scrollbar = ttk.Scrollbar(device_list_frame, orient=tk.VERTICAL, command=self.gui.device_tree.yview)
@@ -106,34 +113,67 @@ class UIBuilder:
         self.gui.device_tree.bind("<Leave>", self.gui.on_device_tree_leave)
         self.gui.device_tree.bind("<Motion>", self.gui.on_device_tree_motion)
         
-        # Right panel - Feature containers
+        # Right panel - Feature containers (mở rộng layout)
         right_panel = ttk.Frame(main_frame)
         right_panel.grid(row=1, column=1, sticky=(tk.W, tk.E, tk.N, tk.S))
         right_panel.columnconfigure(0, weight=1)
         right_panel.columnconfigure(1, weight=1)
+        right_panel.columnconfigure(2, weight=1)
         right_panel.rowconfigure(0, weight=1)
         right_panel.rowconfigure(1, weight=1)
         
-        # Feature containers
+        # Feature containers (layout mở rộng với 5 features)
         self.create_feature_container(right_panel, "⚔️ Auto Rally", "rally", 0, 0)
         self.create_feature_container(right_panel, "🛒 Auto Buy Meat", "buy_meat", 0, 1)
-        self.create_feature_container(right_panel, "🎯 Auto War (No General)", "war_no_general", 1, 0)
-        self.create_feature_container(right_panel, "👹 Auto Attack Boss", "attack_boss", 1, 1)
+        self.create_feature_container(right_panel, "🎯 Auto War (No General)", "war_no_general", 0, 2)
+        self.create_feature_container(right_panel, "👹 Auto Attack Boss", "attack_boss", 1, 0)
+        self.create_feature_container(right_panel, "📦 Auto Open Items", "open_items", 1, 1)
         
         # Control buttons
         control_frame = ttk.Frame(main_frame)
         control_frame.grid(row=2, column=0, columnspan=2, pady=(20, 0))
         
+        # Language selection - mở rộng
+        language_frame = ttk.Frame(control_frame)
+        language_frame.pack(side=tk.LEFT, padx=(0, 30))
+        
+        ttk.Label(language_frame, text="🌐 Ngôn ngữ:", style="Count.TLabel").pack(side=tk.LEFT, padx=(0, 8))
+        
+        # Language dropdown - mở rộng
+        self.gui.language_var = tk.StringVar()
+        available_languages = get_available_languages()
+        language_values = [f"{name} ({code})" for code, name in available_languages.items()]
+        
+        self.gui.language_dropdown = ttk.Combobox(language_frame, textvariable=self.gui.language_var, 
+                                                 values=language_values, state="readonly", width=18)
+        self.gui.language_dropdown.pack(side=tk.LEFT, padx=(0, 8))
+        
+        # Set current language
+        current_lang = get_current_language()
+        current_lang_name = available_languages.get(current_lang, current_lang)
+        self.gui.language_dropdown.set(f"{current_lang_name} ({current_lang})")
+        
+        # Bind language change event
+        self.gui.language_dropdown.bind("<<ComboboxSelected>>", self.gui.on_language_change)
+        
+        # Main control buttons - mở rộng
         self.gui.start_button = ttk.Button(control_frame, text="🚀 Bắt Đầu Tất Cả", 
                                           command=self.gui.start_all_features, style="Start.TButton")
-        self.gui.start_button.pack(side=tk.LEFT, padx=(0, 10))
+        self.gui.start_button.pack(side=tk.LEFT, padx=(0, 15))
         
         self.gui.stop_button = ttk.Button(control_frame, text="⏹️ Dừng Tất Cả", 
                                          command=self.gui.stop_all_features, state=tk.DISABLED, style="Stop.TButton")
-        self.gui.stop_button.pack(side=tk.LEFT, padx=(0, 10))
+        self.gui.stop_button.pack(side=tk.LEFT, padx=(0, 15))
         
         ttk.Button(control_frame, text="🗑️ Clear All Features", 
-                  command=self.gui.device_manager.clear_all_features, style="Action.TButton").pack(side=tk.LEFT)
+                  command=self.gui.device_manager.clear_all_features, style="Action.TButton").pack(side=tk.LEFT, padx=(0, 15))
+        
+        # Thêm thông tin trạng thái
+        status_info_frame = ttk.Frame(control_frame)
+        status_info_frame.pack(side=tk.RIGHT)
+        
+        ttk.Label(status_info_frame, text="💡 Thu nhỏ Devices để mở rộng Features", 
+                 style="Count.TLabel", font=("Arial", 9)).pack()
         
         # Status section
         status_frame = ttk.LabelFrame(main_frame, text="📊 Trạng Thái", padding="10", style="Panel.TLabelframe")

@@ -1,0 +1,19 @@
+{
+    "language": "en",
+    "languages": {
+        "vi": {
+            "name": "Vietnamese",
+            "image_path_prefix": "vi/",
+            "description": "Bản tiếng Việt - sử dụng ảnh trong thư mục vi/"
+        },
+        "en": {
+            "name": "English",
+            "image_path_prefix": "en/",
+            "description": "Bản tiếng Anh - sử dụng ảnh trong thư mục en/"
+        }
+    },
+    "default_settings": {
+        "auto_detect_language": false,
+        "fallback_to_vi": true
+    }
+}

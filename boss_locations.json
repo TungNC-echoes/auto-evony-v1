@@ -1,281 +1,50 @@
 {
-    "last_updated": "2025-09-13 20:57:40",
-    "boss_count": 25,
+    "last_updated": "2025-09-23 23:03:22",
+    "boss_count": 4,
     "bosses": [
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 224 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Phù thủy",
+            "coordinates": "D 139 |\nQuái vật sự kiện Lv2\n| 25M",
             "level": {
-                "S": "1973",
-                "X": "576",
-                "Y": "332"
+                "S": "2033",
+                "X": "778",
+                "Y": "567"
             },
-            "timestamp": "2025-09-13 20:48:45",
+            "timestamp": "2025-09-23 23:02:38",
             "attacked": 1
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 238 |\nQuái vật sự kiện Lv2\n| 22M",
+            "name": "Phù thủy",
+            "coordinates": "D 147 |\nQuái vật sự kiện Lv2\n| 25M",
             "level": {
-                "S": "1973",
-                "X": "361",
-                "Y": "614"
+                "S": "2033",
+                "X": "635",
+                "Y": "751"
             },
-            "timestamp": "2025-09-13 20:48:45",
+            "timestamp": "2025-09-23 23:02:38",
             "attacked": 1
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 259 |\nQuái vật sự kiện Lv3\n| 74M",
+            "name": "Phù thủy",
+            "coordinates": "D 103 |\nQuái vật sự kiện Lv2\n| 25M",
             "level": {
-                "S": "1973",
-                "X": "504",
-                "Y": "797"
+                "S": "2033",
+                "X": "685",
+                "Y": "699"
             },
-            "timestamp": "2025-09-13 20:48:45",
+            "timestamp": "2025-09-23 23:02:38",
             "attacked": 1
         },
         {
-            "name": "Nhân Sư",
-            "coordinates": "D 265 |\nQuái vật sự kiện Lv3\n| 74M",
+            "name": "Phù thủy",
+            "coordinates": "D 137 |\nQuái vật sự kiện Lv2\n| 25M",
             "level": {
-                "S": "1973",
-                "X": "473",
-                "Y": "790"
+                "S": "2033",
+                "X": "748",
+                "Y": "698"
             },
-            "timestamp": "2025-09-13 20:48:45",
+            "timestamp": "2025-09-23 23:02:38",
             "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 279 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "328",
-                "Y": "461"
-            },
-            "timestamp": "2025-09-13 20:48:45",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 302 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "490",
-                "Y": "271"
-            },
-            "timestamp": "2025-09-13 20:48:45",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 305 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "892",
-                "Y": "600"
-            },
-            "timestamp": "2025-09-13 20:48:45",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 305 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "894",
-                "Y": "516"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 309 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "629",
-                "Y": "862"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 318 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "858",
-                "Y": "731"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 328 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "898",
-                "Y": "438"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 333 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "893",
-                "Y": "412"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 342 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "282",
-                "Y": "408"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 349 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "609",
-                "Y": "904"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 352 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "904",
-                "Y": "395"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 354 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "246",
-                "Y": "626"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 355 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "445",
-                "Y": "229"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 360 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "827",
-                "Y": "282"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 1
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 363 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "954",
-                "Y": "536"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 368 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "302",
-                "Y": "330"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 370 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "350",
-                "Y": "832"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 377 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "214",
-                "Y": "571"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 379 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "381",
-                "Y": "238"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 380 |\nQuái vật sự kiện Lv2\n| 22M",
-            "level": {
-                "S": "1973",
-                "X": "220",
-                "Y": "482"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
-        },
-        {
-            "name": "Nhân Sư",
-            "coordinates": "D 381 |\nQuái vật sự kiện Lv3\n| 74M",
-            "level": {
-                "S": "1973",
-                "X": "238",
-                "Y": "414"
-            },
-            "timestamp": "2025-09-13 20:48:46",
-            "attacked": 0
         }
     ]
 }

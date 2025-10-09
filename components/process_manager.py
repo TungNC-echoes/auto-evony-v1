@@ -9,6 +9,7 @@ from actions.war_actions import join_war_sequence, continue_war_sequence, join_w
 from utils.adb_utils import set_device
 from actions.rally import auto_join_rally
 from actions.market_actions import auto_buy_meat
+from actions.open_items_actions import open_items_sequence, open_items_selective_sequence
 
 # Import cho attack boss
 import sys
@@ -45,6 +46,8 @@ def run_single_task_process(task, task_index, total_tasks, log_queue):
             # Get troops_count from task for attack_boss
             troops_count = task.get('troops_count', 1000)  # Default fallback
             run_attack_boss_direct_process(device_id, log_queue=log_queue, troops_count=troops_count)
+        elif feature_code == "5":
+            run_open_items_direct_process(device_id, log_queue=log_queue)
         
         log_queue.put(f"✅ [Task {task_index}/{total_tasks}] Hoàn thành {feature_name} trên {device['name']}")
             
@@ -170,3 +173,33 @@ def run_attack_boss_direct_process(device_id, log_queue=None, troops_count=1000)
     except Exception as e:
         if log_queue:
             log_queue.put(f"❌ Lỗi nghiêm trọng khi tấn công boss trên {device_id}: {e}")
+
+
+def run_open_items_direct_process(device_id, log_queue=None):
+    """Chạy open_items trong process con"""
+    try:
+        if log_queue:
+            log_queue.put(f"📦 Bắt đầu auto open items trên device {device_id}")
+        
+        # Chạy vòng lặp vô hạn để mở items liên tục
+        while True:
+            try:
+                # Thực hiện chuỗi mở items
+                if open_items_sequence(device_id):
+                    if log_queue:
+                        log_queue.put(f"✅ Hoàn thành một lượt mở items trên {device_id}")
+                else:
+                    if log_queue:
+                        log_queue.put(f"⚠️ Không thể mở items trên {device_id}, thử lại sau...")
+                
+                # Chờ một chút trước khi thử lại
+                time.sleep(5)
+                
+            except Exception as e:
+                if log_queue:
+                    log_queue.put(f"❌ Lỗi khi mở items trên {device_id}: {e}")
+                time.sleep(10)  # Chờ lâu hơn khi có lỗi
+                
+    except Exception as e:
+        if log_queue:
+            log_queue.put(f"❌ Lỗi nghiêm trọng khi mở items trên {device_id}: {e}")

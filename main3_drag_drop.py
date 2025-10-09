@@ -14,6 +14,7 @@ from datetime import datetime
 from components.process_manager import run_single_task_process
 from components.device_manager import DeviceManager
 from components.ui_builder import UIBuilder
+from utils.language_utils import set_language, get_current_language, get_available_languages
 
 
 class DragDropGUI:
@@ -34,7 +35,8 @@ class DragDropGUI:
             "rally": {"running": False, "processes": []},
             "buy_meat": {"running": False, "processes": []},
             "war_no_general": {"running": False, "processes": []},
-            "attack_boss": {"running": False, "processes": []}
+            "attack_boss": {"running": False, "processes": []},
+            "open_items": {"running": False, "processes": []}
         }
         
         # Initialize device manager and UI builder
@@ -68,6 +70,47 @@ class DragDropGUI:
     def on_feature_tree_leave(self, event):
         """Handle hover leave on feature treeview"""
         event.widget.configure(cursor="arrow")
+    
+    def on_language_change(self, event):
+        """Handle language change event"""
+        try:
+            selected_text = self.language_var.get()
+            # Extract language code from "Language Name (code)" format
+            if "(" in selected_text and ")" in selected_text:
+                language_code = selected_text.split("(")[1].split(")")[0]
+                
+                # Change language
+                if set_language(language_code):
+                    self.log_status(f"🌐 Đã chuyển sang ngôn ngữ: {selected_text}")
+                    
+                    # Update UI to reflect language change
+                    self.update_language_ui()
+                else:
+                    self.log_status(f"❌ Không thể chuyển sang ngôn ngữ: {selected_text}")
+                    # Revert selection
+                    current_lang = get_current_language()
+                    available_languages = get_available_languages()
+                    current_lang_name = available_languages.get(current_lang, current_lang)
+                    self.language_dropdown.set(f"{current_lang_name} ({current_lang})")
+            else:
+                self.log_status(f"❌ Định dạng ngôn ngữ không hợp lệ: {selected_text}")
+        except Exception as e:
+            self.log_status(f"❌ Lỗi khi thay đổi ngôn ngữ: {e}")
+    
+    def update_language_ui(self):
+        """Update UI elements to reflect language change"""
+        try:
+            # Update language dropdown display
+            current_lang = get_current_language()
+            available_languages = get_available_languages()
+            current_lang_name = available_languages.get(current_lang, current_lang)
+            self.language_dropdown.set(f"{current_lang_name} ({current_lang})")
+            
+            # You can add more UI updates here if needed
+            # For example, update button texts, labels, etc.
+            
+        except Exception as e:
+            self.log_status(f"❌ Lỗi khi cập nhật UI ngôn ngữ: {e}")
     
     def on_feature_tree_motion(self, event):
         """Handle hover motion on feature treeview"""
@@ -245,7 +288,8 @@ class DragDropGUI:
             "rally": "⚔️ Auto Rally",
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
-            "attack_boss": "👹 Auto Attack Boss"
+            "attack_boss": "👹 Auto Attack Boss",
+            "open_items": "📦 Auto Open Items"
         }
         
         confirm = messagebox.askyesno("Xác nhận", 
@@ -314,7 +358,8 @@ class DragDropGUI:
             "rally": "⚔️ Auto Rally",
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
-            "attack_boss": "👹 Auto Attack Boss"
+            "attack_boss": "👹 Auto Attack Boss",
+            "open_items": "📦 Auto Open Items"
         }
         
         self.log_status(f"⏹️ Đã dừng {feature_names[feature_key]}")
@@ -329,7 +374,8 @@ class DragDropGUI:
                 "rally": ("1", "Auto tham gia Rally"),
                 "buy_meat": ("2", "Auto mua thịt"),
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
-                "attack_boss": ("4", "Auto tấn công Boss")
+                "attack_boss": ("4", "Auto tấn công Boss"),
+                "open_items": ("5", "Auto mở Items")
             }
             
             feature_code, feature_name = feature_mapping[feature_key]
@@ -428,7 +474,8 @@ class DragDropGUI:
             "rally": "⚔️ Auto Rally",
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
-            "attack_boss": "👹 Auto Attack Boss"
+            "attack_boss": "👹 Auto Attack Boss",
+            "open_items": "📦 Auto Open Items"
         }
         
         self.log_status(f"✅ Hoàn thành {feature_names[feature_key]}")
@@ -464,7 +511,8 @@ class DragDropGUI:
                 "rally": ("1", "Auto tham gia Rally"),
                 "buy_meat": ("2", "Auto mua thịt"),
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
-                "attack_boss": ("4", "Auto tấn công Boss")
+                "attack_boss": ("4", "Auto tấn công Boss"),
+                "open_items": ("5", "Auto mở Items")
             }
             
             # Collect all device-feature tasks (đảm bảo mỗi device chỉ chạy 1 feature)

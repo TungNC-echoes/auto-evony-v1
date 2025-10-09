@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.image_utils import find_and_click_button, find_and_click_right_edge, check_button_exists
 from utils.adb_utils import adb_command, input_text, cancel_action
+from utils.language_utils import get_image_path
 from actions.boss_data_manager import save_boss_data
 from actions.war_actions import handle_insufficient_stamina
 
@@ -159,73 +160,73 @@ def get_boss_config(boss_name, troops_count=500000):
     specific_boss_types = {
         "Cerberus Cấp Thấp": {
             "folder": "cerberus", 
-            "image_path": "images/buttons/attack/cerberus",
+            "image_path": get_image_path("buttons/attack/cerberus"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
-            "image_path": "images/buttons/attack/pan_luc_quan",
+            "image_path": get_image_path("buttons/attack/pan_luc_quan"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Người đá": {
             "folder": "nguoi_da", 
-            "image_path": "images/buttons/attack/nguoi_da",
+            "image_path": get_image_path("buttons/attack/nguoi_da"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Viễn Quân)": {
             "folder": "pan_vien_quan", 
-            "image_path": "images/buttons/attack/pan_vien_quan",
+            "image_path": get_image_path("buttons/attack/pan_vien_quan"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Harp bình thường": {
             "folder": "harp",
-            "image_path": "images/buttons/attack/harp",
+            "image_path": get_image_path("buttons/attack/harp"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Phù thủy": {
             "folder": "phu_thuy",
-            "image_path": "images/buttons/attack/phu_thuy",
+            "image_path": get_image_path("buttons/attack/phu_thuy"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Nhân Sư": {
             "folder": "nhan_su",
-            "image_path": "images/buttons/attack/nhan_su",
+            "image_path": get_image_path("buttons/attack/nhan_su"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Rùa Nham thạch": {
             "folder": "rua",
-            "image_path": "images/buttons/attack/rua",
+            "image_path": get_image_path("buttons/attack/rua"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Ymir": {
             "folder": "ymir",
-            "image_path": "images/buttons/attack/ymir",
+            "image_path": get_image_path("buttons/attack/ymir"),
             "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Lãnh chúa": {
             "folder": "lanh_chua",
-            "image_path": "images/buttons/attack/lanh_chua",
+            "image_path": get_image_path("buttons/attack/lanh_chua"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Hiệp sĩ Cấp thấp Bayard": {
             "folder": "bayard",
-            "image_path": "images/buttons/attack/Bayard",
+            "image_path": get_image_path("buttons/attack/Bayard"),
             "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Normal Serpopard": {
             "folder": "serpopard",
-            "image_path": "images/buttons/attack/serpopard",
+            "image_path": get_image_path("buttons/attack/serpopard"),
             "troops_count": str(troops_count),
             "threshold": 0.9
         }
@@ -244,7 +245,7 @@ def get_boss_config(boss_name, troops_count=500000):
     clean_name = clean_name.replace("trùm_quái_vật_", "").replace("trùm_", "")
     
     # Tạo đường dẫn ảnh dựa trên tên đã làm sạch
-    image_path = f"images/buttons/attack/{clean_name}"
+    image_path = get_image_path(f"buttons/attack/{clean_name}")
     
     # Kiểm tra xem thư mục ảnh có tồn tại không
     folder_exists = check_image_folder_exists(image_path)
