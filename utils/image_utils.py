@@ -199,18 +199,31 @@ def find_button_position(button_image_path, device_id=None, threshold=0.95):
         return None
 
 
-def find_and_click_right_edge(button_name, device_id=None, wait_time=1):
+def find_and_click_right_edge(button_name, device_id=None, wait_time=1, threshold=0.8):
     """Tìm và click vào cạnh phải của nút"""
     try:
         print(f"Đang tìm nút {button_name} trên device {device_id}...")
-        # Tìm nút trong thư mục buttons
-        button_path = f"./images/buttons/{button_name}.JPG"
-        if not os.path.exists(button_path):
-            print(f"Không tìm thấy ảnh nút {button_name}")
-            return False
+        # Tìm nút với language support
+        if isinstance(button_name, tuple):
+            base_path = "/".join(button_name)
+        else:
+            base_path = button_name
+        
+        # Get language-aware path
+        button_path = get_image_path(f"buttons/{base_path}")
+        
+        # Try different extensions
+        if not os.path.exists(f"{button_path}.JPG"):
+            if not os.path.exists(f"{button_path}.jpg"):
+                print(f"Không tìm thấy ảnh nút {button_path}")
+                return False
+            else:
+                button_path = f"{button_path}.jpg"
+        else:
+            button_path = f"{button_path}.JPG"
             
         # Tìm vị trí nút trên màn hình
-        button_info = find_button_position(button_path, device_id, 0.95)
+        button_info = find_button_position(button_path, device_id, threshold)
         if button_info:
             # Tap vào cạnh phải của nút
             from utils.adb_utils import tap_screen

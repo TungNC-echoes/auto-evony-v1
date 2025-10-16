@@ -7,7 +7,7 @@ import multiprocessing
 import time
 from actions.war_actions import join_war_sequence, continue_war_sequence, join_war_sequence_no_general
 from utils.adb_utils import set_device
-from actions.rally import auto_join_rally
+from actions.rally import auto_join_rally, auto_join_advanced_rally_with_boss_selection
 from actions.market_actions import auto_buy_meat
 from actions.open_items_actions import open_items_sequence, open_items_selective_sequence
 
@@ -48,6 +48,14 @@ def run_single_task_process(task, task_index, total_tasks, log_queue):
             run_attack_boss_direct_process(device_id, log_queue=log_queue, troops_count=troops_count)
         elif feature_code == "5":
             run_open_items_direct_process(device_id, log_queue=log_queue)
+        elif feature_code == "6":
+            # Advanced Rally
+            selected_bosses = task.get('selected_bosses', [])
+            run_advanced_rally_direct_process(device_id, log_queue=log_queue, selected_bosses=selected_bosses)
+        elif feature_code == "7":
+            # Advanced War
+            selected_bosses = task.get('selected_bosses', [])
+            run_advanced_war_direct_process(device_id, log_queue=log_queue, selected_bosses=selected_bosses)
         
         log_queue.put(f"✅ [Task {task_index}/{total_tasks}] Hoàn thành {feature_name} trên {device['name']}")
             
@@ -97,7 +105,12 @@ def run_attack_boss_direct_process(device_id, log_queue=None, troops_count=1000)
                     log_queue.put(f"📡 Đang cập nhật vị trí boss từ thiết bị {device_id}...")
                 
                 # Sử dụng hàm từ get_location_boss (file cũ, an toàn)
+                if log_queue:
+                    log_queue.put("🔍 Đang gọi get_boss_locations()...")
                 bosses = get_boss_locations()
+                
+                if log_queue:
+                    log_queue.put(f"📊 Kết quả get_boss_locations(): {type(bosses)} - {len(bosses) if bosses else 0} boss")
                 
                 if not bosses:
                     if log_queue:
@@ -203,3 +216,53 @@ def run_open_items_direct_process(device_id, log_queue=None):
     except Exception as e:
         if log_queue:
             log_queue.put(f"❌ Lỗi nghiêm trọng khi mở items trên {device_id}: {e}")
+
+def run_advanced_rally_direct_process(device_id, log_queue=None, selected_bosses=None):
+    """Chạy Advanced Rally với boss selection trong process con"""
+    try:
+        if log_queue:
+            log_queue.put(f"🎯 Bắt đầu Advanced Rally trên device {device_id}")
+            log_queue.put(f"📋 Selected bosses: {selected_bosses}")
+            log_queue.put(f"🔍 Debug: selected_bosses type: {type(selected_bosses)}, length: {len(selected_bosses) if selected_bosses else 0}")
+        
+        # Kiểm tra selected_bosses
+        if not selected_bosses:
+            if log_queue:
+                log_queue.put("⚠️ Không có boss nào được chọn, sử dụng logic Basic Rally")
+            # Fallback to Basic Rally if no bosses selected
+            from actions.rally import auto_join_rally
+            auto_join_rally(device_id, use_general=True)
+        else:
+            # Gọi function Advanced Rally
+            auto_join_advanced_rally_with_boss_selection(device_id, use_general=True, selected_bosses=selected_bosses)
+        
+        if log_queue:
+            log_queue.put(f"✅ Hoàn thành Advanced Rally trên device {device_id}")
+    except Exception as e:
+        if log_queue:
+            log_queue.put(f"❌ Lỗi khi chạy Advanced Rally trên {device_id}: {e}")
+
+def run_advanced_war_direct_process(device_id, log_queue=None, selected_bosses=None):
+    """Chạy Advanced War với boss selection trong process con"""
+    try:
+        if log_queue:
+            log_queue.put(f"🎯 Bắt đầu Advanced War trên device {device_id}")
+            log_queue.put(f"📋 Selected bosses: {selected_bosses}")
+            log_queue.put(f"🔍 Debug: selected_bosses type: {type(selected_bosses)}, length: {len(selected_bosses) if selected_bosses else 0}")
+        
+        # Kiểm tra selected_bosses
+        if not selected_bosses:
+            if log_queue:
+                log_queue.put("⚠️ Không có boss nào được chọn, sử dụng logic Basic Rally")
+            # Fallback to Basic Rally if no bosses selected
+            from actions.rally import auto_join_rally
+            auto_join_rally(device_id, use_general=False)
+        else:
+            # Gọi function Advanced Rally (không chọn tướng)
+            auto_join_advanced_rally_with_boss_selection(device_id, use_general=False, selected_bosses=selected_bosses)
+        
+        if log_queue:
+            log_queue.put(f"✅ Hoàn thành Advanced War trên device {device_id}")
+    except Exception as e:
+        if log_queue:
+            log_queue.put(f"❌ Lỗi khi chạy Advanced War trên {device_id}: {e}")

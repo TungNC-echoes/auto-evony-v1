@@ -27,7 +27,9 @@ class DeviceManager:
             "buy_meat": [],
             "war_no_general": [],
             "attack_boss": [],
-            "open_items": []
+            "open_items": [],
+            "advanced_rally": [],
+            "advanced_war": []
         }
         
         # Device-process mapping để track process của từng device
@@ -36,7 +38,9 @@ class DeviceManager:
             "buy_meat": {},
             "war_no_general": {},
             "attack_boss": {},
-            "open_items": {}
+            "open_items": {},
+            "advanced_rally": {},
+            "advanced_war": {}
         }
     
     def kill_specific_device_process(self, device_id, device_name, feature_key):
@@ -502,6 +506,8 @@ class DeviceManager:
             "🎯 War": "war_no_general",
             "👹 Attack Boss": "attack_boss",
             "📦 Open Items": "open_items",
+            "⚔️ Advanced Rally": "advanced_rally",
+            "🎯 Advanced War": "advanced_war",
             # Keep old format for backward compatibility
             "⚔️ Auto Rally": "rally",
             "🛒 Auto Buy Meat": "buy_meat", 

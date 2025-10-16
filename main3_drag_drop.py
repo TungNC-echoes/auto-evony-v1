@@ -21,7 +21,7 @@ class DragDropGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("EVONY AUTO - Drag & Drop Manager")
-        self.root.geometry("1600x900")
+        self.root.geometry("1920x1080")  # Tăng 20% (1600*1.2=1920, 900*1.2=1080)
         self.root.resizable(True, True)
         
         # Variables
@@ -36,7 +36,9 @@ class DragDropGUI:
             "buy_meat": {"running": False, "processes": []},
             "war_no_general": {"running": False, "processes": []},
             "attack_boss": {"running": False, "processes": []},
-            "open_items": {"running": False, "processes": []}
+            "open_items": {"running": False, "processes": []},
+            "advanced_rally": {"running": False, "processes": []},
+            "advanced_war": {"running": False, "processes": []}
         }
         
         # Initialize device manager and UI builder
@@ -289,7 +291,9 @@ class DragDropGUI:
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
-            "open_items": "📦 Auto Open Items"
+            "open_items": "📦 Auto Open Items",
+            "advanced_rally": "⚔️ Advanced Rally",
+            "advanced_war": "🎯 Advanced War (No General)"
         }
         
         confirm = messagebox.askyesno("Xác nhận", 
@@ -359,7 +363,9 @@ class DragDropGUI:
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
-            "open_items": "📦 Auto Open Items"
+            "open_items": "📦 Auto Open Items",
+            "advanced_rally": "⚔️ Advanced Rally",
+            "advanced_war": "🎯 Advanced War (No General)"
         }
         
         self.log_status(f"⏹️ Đã dừng {feature_names[feature_key]}")
@@ -375,7 +381,9 @@ class DragDropGUI:
                 "buy_meat": ("2", "Auto mua thịt"),
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
                 "attack_boss": ("4", "Auto tấn công Boss"),
-                "open_items": ("5", "Auto mở Items")
+                "open_items": ("5", "Auto mở Items"),
+                "advanced_rally": ("6", "Advanced Rally với Boss Selection"),
+                "advanced_war": ("7", "Advanced War với Boss Selection")
             }
             
             feature_code, feature_name = feature_mapping[feature_key]
@@ -397,6 +405,10 @@ class DragDropGUI:
                         task['troops_count'] = troops_count
                     except:
                         task['troops_count'] = 1000  # Default fallback
+                
+                # Add selected_bosses for Advanced features
+                if feature_key in ["advanced_rally", "advanced_war"]:
+                    task['selected_bosses'] = self.get_selected_bosses()
                 
                 tasks.append(task)
             
@@ -475,7 +487,9 @@ class DragDropGUI:
             "buy_meat": "🛒 Auto Buy Meat", 
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
-            "open_items": "📦 Auto Open Items"
+            "open_items": "📦 Auto Open Items",
+            "advanced_rally": "⚔️ Advanced Rally",
+            "advanced_war": "🎯 Advanced War (No General)"
         }
         
         self.log_status(f"✅ Hoàn thành {feature_names[feature_key]}")
@@ -512,7 +526,9 @@ class DragDropGUI:
                 "buy_meat": ("2", "Auto mua thịt"),
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
                 "attack_boss": ("4", "Auto tấn công Boss"),
-                "open_items": ("5", "Auto mở Items")
+                "open_items": ("5", "Auto mở Items"),
+                "advanced_rally": ("6", "Advanced Rally với Boss Selection"),
+                "advanced_war": ("7", "Advanced War với Boss Selection")
             }
             
             # Collect all device-feature tasks (đảm bảo mỗi device chỉ chạy 1 feature)
@@ -677,6 +693,22 @@ class DragDropGUI:
         # Schedule next update
         self.root.after(1000, self.update_ui_states)  # Update every 1 second
 
+
+    def get_selected_bosses(self):
+        """Get selected bosses from UI"""
+        try:
+            if not hasattr(self, 'boss_vars'):
+                return []
+            
+            selected_bosses = []
+            for boss_name, var in self.boss_vars.items():
+                if var.get():
+                    selected_bosses.append(boss_name)
+            
+            return selected_bosses
+        except Exception as e:
+            print(f"Error getting selected bosses: {e}")
+            return []
 
 def main():
     """Hàm chính của chương trình"""

@@ -108,7 +108,12 @@ class LanguageConfig:
             return f"images/{base_path}"  # Fallback to original path
     
     def _check_image_exists(self, path: str) -> bool:
-        """Check if image file exists with common extensions"""
+        """Check if image file or directory exists"""
+        # Check if it's a directory (for boss images)
+        if os.path.isdir(path):
+            return True
+        
+        # Check if it's a file with common extensions
         extensions = ['.JPG', '.jpg', '.PNG', '.png', '.JPEG', '.jpeg']
         for ext in extensions:
             if os.path.exists(f"{path}{ext}"):

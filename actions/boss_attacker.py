@@ -11,7 +11,7 @@ from utils.language_utils import get_image_path
 from actions.boss_data_manager import save_boss_data
 from actions.war_actions import handle_insufficient_stamina
 
-def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_time=None, threshold=0.8):
+def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_time=None, threshold=0.8, boss_info=None):
     """Tấn công boss với tên và tọa độ được cung cấp"""
     try:
         print(f"🔍 Tìm kiếm: {boss_name} - {image_folder} - X:{x_coord}, Y:{y_coord}")
@@ -39,7 +39,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
         time.sleep(2)
 
         # Nhập tọa độ X
-        if not find_and_click_right_edge("attack/x"):
+        if not find_and_click_right_edge("attack/x", threshold=0.8):
             print("Không tìm thấy ô nhập tọa độ X")
             cancel_action()
             return False
@@ -54,7 +54,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
         time.sleep(2)
 
         # Nhập tọa độ Y
-        if not find_and_click_right_edge("attack/y"):
+        if not find_and_click_right_edge("attack/y", threshold=0.8):
             print("Không tìm thấy ô nhập tọa độ Y")
             cancel_action()
             return False
@@ -69,7 +69,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
         time.sleep(2)
 
         # Click nút tiến hành
-        if not find_and_click_button("attack/tien_hanh"):
+        if not find_and_click_button("attack/tien_hanh", threshold=0.8):
             return False
             
         time.sleep(3)
@@ -79,7 +79,7 @@ def attack_boss(boss_name, x_coord, y_coord, image_folder, troops_count, start_t
             for image_file in os.listdir(image_folder):
                 if image_file.endswith(('.jpg', '.JPG', '.png', '.PNG')):
                     image_name = os.path.splitext(image_file)[0]
-                    if find_and_click_button(f"attack/{boss_name}/{image_name}", 'none', 1, 2, threshold):
+                    if boss_info and find_and_click_button(f"attack/{boss_info['folder']}/{image_name}", 'none', 1, 2, threshold):
                         print(f"✅ Tìm thấy: {boss_name} - {image_name}")
                         result = execute_attack_sequence(start_time, troops_count)  # Truyền số lượng quân
                         if result == "update_required":
@@ -160,73 +160,73 @@ def get_boss_config(boss_name, troops_count=500000):
     specific_boss_types = {
         "Cerberus Cấp Thấp": {
             "folder": "cerberus", 
-            "image_path": get_image_path("buttons/attack/cerberus"),
+            "image_path": get_image_path("buttons/attack/cerberus/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
-            "image_path": get_image_path("buttons/attack/pan_luc_quan"),
+            "image_path": get_image_path("buttons/attack/pan_luc_quan/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Người đá": {
             "folder": "nguoi_da", 
-            "image_path": get_image_path("buttons/attack/nguoi_da"),
+            "image_path": get_image_path("buttons/attack/nguoi_da/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Pan (Viễn Quân)": {
             "folder": "pan_vien_quan", 
-            "image_path": get_image_path("buttons/attack/pan_vien_quan"),
+            "image_path": get_image_path("buttons/attack/pan_vien_quan/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Harp bình thường": {
             "folder": "harp",
-            "image_path": get_image_path("buttons/attack/harp"),
+            "image_path": get_image_path("buttons/attack/harp/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Phù thủy": {
             "folder": "phu_thuy",
-            "image_path": get_image_path("buttons/attack/phu_thuy"),
+            "image_path": get_image_path("buttons/attack/phu_thuy/"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Nhân Sư": {
             "folder": "nhan_su",
-            "image_path": get_image_path("buttons/attack/nhan_su"),
+            "image_path": get_image_path("buttons/attack/nhan_su/"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Rùa Nham thạch": {
             "folder": "rua",
-            "image_path": get_image_path("buttons/attack/rua"),
+            "image_path": get_image_path("buttons/attack/rua/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
         "Ymir": {
             "folder": "ymir",
-            "image_path": get_image_path("buttons/attack/ymir"),
+            "image_path": get_image_path("buttons/attack/ymir/"),
             "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Lãnh chúa": {
             "folder": "lanh_chua",
-            "image_path": get_image_path("buttons/attack/lanh_chua"),
+            "image_path": get_image_path("buttons/attack/lanh_chua/"),
             "troops_count": str(troops_count),
             "threshold": 0.75
         },
         "Hiệp sĩ Cấp thấp Bayard": {
             "folder": "bayard",
-            "image_path": get_image_path("buttons/attack/Bayard"),
+            "image_path": get_image_path("buttons/attack/bayard/"),
             "troops_count": str(troops_count),
             "threshold": 0.8
         },
         "Normal Serpopard": {
             "folder": "serpopard",
-            "image_path": get_image_path("buttons/attack/serpopard"),
+            "image_path": get_image_path("buttons/attack/serpopard/"),
             "troops_count": str(troops_count),
             "threshold": 0.9
         }
@@ -298,7 +298,8 @@ def attack_selected_bosses(selected_groups, bosses, start_time=None, troops_coun
                                   boss_info['image_path'],
                                   boss_info['troops_count'],
                                   start_time,
-                                  boss_info.get('threshold', 0.7))
+                                  boss_info.get('threshold', 0.7),
+                                  boss_info)
                 if result == "update_required":
                     return "update_required"
                 elif result:
@@ -327,7 +328,7 @@ def execute_attack_sequence(start_time=None, troops_count="300000"):
 
         # Click lần lượt các nút đầu tiên
         for button in initial_buttons:
-            if not find_and_click_button(button):
+            if not find_and_click_button(button, threshold=0.85):
                 print(f"Không thể click vào nút {button}")
                 return False
             time.sleep(2)
@@ -338,13 +339,13 @@ def execute_attack_sequence(start_time=None, troops_count="300000"):
         
         while retry_count < max_retries:
             # Click nút 5minutes và kiểm tra doi_quan_san_co
-            if not find_and_click_button("attack/5minutes", 'none', 1):
+            if not find_and_click_button("attack/5minutes", 'none', 1, threshold=0.85):
                 print("Không thể click vào nút 5minutes")
                 return False
             time.sleep(2)
 
             # Kiểm tra nút doi_quan_san_co
-            if check_button_exists("doi_quan_san_co", 'none', 0.95):
+            if check_button_exists("doi_quan_san_co", 'none', 0.85):
                 if find_and_click_button("doi_quan_san_co"):
                     # Nếu click thành công, tiếp tục chuỗi hành động
                     remaining_buttons = [

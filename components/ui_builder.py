@@ -28,7 +28,7 @@ class UIBuilder:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(0, weight=1)  # Left panel - thu nhỏ
-        main_frame.columnconfigure(1, weight=3)  # Right panel - mở rộng
+        main_frame.columnconfigure(1, weight=12)  # Right panel - tăng mạnh hơn (1:12)
         main_frame.rowconfigure(1, weight=1)
         
         # Title with gradient effect
@@ -72,7 +72,7 @@ class UIBuilder:
         # Create dropdown for feature selection - compact
         self.gui.feature_var = tk.StringVar()
         feature_dropdown = ttk.Combobox(row2_frame, textvariable=self.gui.feature_var, 
-                                       values=["⚔️ Rally", "🛒 Buy Meat", "🎯 War", "👹 Attack Boss", "📦 Open Items"],
+                                       values=["⚔️ Rally", "🛒 Buy Meat", "🎯 War", "👹 Attack Boss", "📦 Open Items", "⚔️ Advanced Rally", "🎯 Advanced War"],
                                        state="readonly", width=15)
         feature_dropdown.pack(side=tk.LEFT, padx=(0, 3))
         feature_dropdown.set("⚔️ Rally")  # Default selection
@@ -113,21 +113,53 @@ class UIBuilder:
         self.gui.device_tree.bind("<Leave>", self.gui.on_device_tree_leave)
         self.gui.device_tree.bind("<Motion>", self.gui.on_device_tree_motion)
         
-        # Right panel - Feature containers (mở rộng layout)
+        # Right panel - Feature containers with scroll
         right_panel = ttk.Frame(main_frame)
         right_panel.grid(row=1, column=1, sticky=(tk.W, tk.E, tk.N, tk.S))
         right_panel.columnconfigure(0, weight=1)
-        right_panel.columnconfigure(1, weight=1)
-        right_panel.columnconfigure(2, weight=1)
         right_panel.rowconfigure(0, weight=1)
-        right_panel.rowconfigure(1, weight=1)
+
+        # Create scrollable frame for features
+        features_canvas = tk.Canvas(right_panel, bg="#f8f9fa")
+        features_scrollbar = ttk.Scrollbar(right_panel, orient=tk.VERTICAL, command=features_canvas.yview)
+        scrollable_features_frame = ttk.Frame(features_canvas)
+
+        scrollable_features_frame.bind(
+            "<Configure>",
+            lambda e: features_canvas.configure(scrollregion=features_canvas.bbox("all"))
+        )
+
+        features_canvas.create_window((0, 0), window=scrollable_features_frame, anchor="nw")
+        features_canvas.configure(yscrollcommand=features_scrollbar.set)
+
+        features_canvas.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        features_scrollbar.grid(row=0, column=1, sticky=(tk.N, tk.S))
         
-        # Feature containers (layout mở rộng với 5 features)
-        self.create_feature_container(right_panel, "⚔️ Auto Rally", "rally", 0, 0)
-        self.create_feature_container(right_panel, "🛒 Auto Buy Meat", "buy_meat", 0, 1)
-        self.create_feature_container(right_panel, "🎯 Auto War (No General)", "war_no_general", 0, 2)
-        self.create_feature_container(right_panel, "👹 Auto Attack Boss", "attack_boss", 1, 0)
-        self.create_feature_container(right_panel, "📦 Auto Open Items", "open_items", 1, 1)
+        # Bind mouse wheel to canvas - chỉ cho features canvas
+        def _on_mousewheel(event):
+            features_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        features_canvas.bind("<MouseWheel>", _on_mousewheel)
+
+        # Configure scrollable frame - 2 columns bằng nhau
+        scrollable_features_frame.columnconfigure(0, weight=1, minsize=670)  # Column đầu tiên - bằng nhau
+        scrollable_features_frame.columnconfigure(1, weight=1, minsize=670)  # Column thứ 2 - bằng nhau
+        scrollable_features_frame.rowconfigure(0, weight=1)     # Row đầu tiên
+        scrollable_features_frame.rowconfigure(1, weight=1)     # Row thứ 2 bằng nhau
+        scrollable_features_frame.rowconfigure(2, weight=1)     # Row thứ 3 (Auto Open Items)
+
+        # Feature containers (2 features per row)
+        self.create_feature_container(scrollable_features_frame, "⚔️ Auto Rally", "rally", 0, 0)
+        self.create_feature_container(scrollable_features_frame, "🛒 Auto Buy Meat", "buy_meat", 0, 1)
+        self.create_feature_container(scrollable_features_frame, "🎯 Auto War (No General)", "war_no_general", 1, 0)
+        self.create_feature_container(scrollable_features_frame, "👹 Auto Attack Boss", "attack_boss", 1, 1)
+        self.create_feature_container(scrollable_features_frame, "📦 Auto Open Items", "open_items", 2, 0, columnspan=2)
+        
+        # Boss selection section
+        self.setup_boss_selection_ui(scrollable_features_frame)
+        
+        # Advanced features (1 row, 2 columns)
+        self.create_feature_container(scrollable_features_frame, "⚔️ Advanced Rally", "advanced_rally", 4, 0)
+        self.create_feature_container(scrollable_features_frame, "🎯 Advanced War (No General)", "advanced_war", 4, 1)
         
         # Control buttons
         control_frame = ttk.Frame(main_frame)
@@ -201,10 +233,10 @@ class UIBuilder:
         main_frame.rowconfigure(1, weight=1)
         main_frame.rowconfigure(3, weight=1)
     
-    def create_feature_container(self, parent, title, feature_key, row, col):
+    def create_feature_container(self, parent, title, feature_key, row, col, columnspan=1):
         """Tạo container cho một tính năng"""
         container = ttk.LabelFrame(parent, text=title, padding="10", style="Panel.TLabelframe")
-        container.grid(row=row, column=col, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5, pady=5)
+        container.grid(row=row, column=col, columnspan=columnspan, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5, pady=5)
         container.columnconfigure(0, weight=1)
         container.rowconfigure(1, weight=1)
         
@@ -319,3 +351,124 @@ class UIBuilder:
         feature_tree.bind("<Enter>", lambda e: self.gui.on_feature_tree_enter(e))
         feature_tree.bind("<Leave>", lambda e: self.gui.on_feature_tree_leave(e))
         feature_tree.bind("<Motion>", lambda e: self.gui.on_feature_tree_motion(e))
+    
+    def setup_boss_selection_ui(self, parent):
+        """Tạo UI cho việc chọn boss types"""
+        import os
+        
+        # Boss selection frame
+        boss_frame = ttk.LabelFrame(parent, text="👹 Select Boss Types", padding="10", style="Panel.TLabelframe")
+        boss_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5, pady=5)
+        boss_frame.columnconfigure(0, weight=1)
+        
+        # Language selection for boss images
+        lang_frame = ttk.Frame(boss_frame)
+        lang_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 10))
+        
+        ttk.Label(lang_frame, text="Language:", style="Count.TLabel").pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Language dropdown
+        self.gui.boss_language_var = tk.StringVar(value="English (en)")
+        boss_language_combo = ttk.Combobox(lang_frame, textvariable=self.gui.boss_language_var, 
+                                          values=["English (en)", "Vietnamese (vi)"], 
+                                          state="readonly", width=15)
+        boss_language_combo.pack(side=tk.LEFT)
+        boss_language_combo.bind("<<ComboboxSelected>>", self.on_boss_language_change)
+        
+        # Check All / Uncheck All buttons
+        check_all_btn = ttk.Button(lang_frame, text="Check All", 
+                                  command=self.check_all_bosses, width=10)
+        check_all_btn.pack(side=tk.LEFT, padx=(10, 5))
+        
+        uncheck_all_btn = ttk.Button(lang_frame, text="Uncheck All", 
+                                    command=self.uncheck_all_bosses, width=10)
+        uncheck_all_btn.pack(side=tk.LEFT, padx=(0, 5))
+        
+        # Boss checkboxes frame
+        self.gui.boss_checkboxes_frame = ttk.Frame(boss_frame)
+        self.gui.boss_checkboxes_frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        # Configure columns - chỉ cột đầu có weight, các cột khác không có weight để dồn về trái
+        self.gui.boss_checkboxes_frame.columnconfigure(0, weight=1)
+        for i in range(1, 5):  # Cột 1-4 không có weight
+            self.gui.boss_checkboxes_frame.columnconfigure(i, weight=0)
+        
+        # Initialize boss variables
+        self.gui.boss_vars = {}
+        
+        # Load boss checkboxes
+        self.setup_boss_checkboxes()
+    
+    def setup_boss_checkboxes(self):
+        """Tạo checkboxes cho boss types"""
+        import os
+        
+        # Clear existing checkboxes
+        for widget in self.gui.boss_checkboxes_frame.winfo_children():
+            widget.destroy()
+        
+        # Get current language
+        current_lang = self.gui.boss_language_var.get().split(" ")[-1].strip("()")
+        boss_dir = f"images/{current_lang}/buttons/rally_advance_boss"
+        
+        if not os.path.exists(boss_dir):
+            ttk.Label(self.gui.boss_checkboxes_frame, 
+                     text=f"Boss directory not found: {boss_dir}", 
+                     style="Count.TLabel").grid(row=0, column=0, sticky=tk.W)
+            return
+        
+        # Get boss image files
+        boss_files = []
+        for file in os.listdir(boss_dir):
+            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+                boss_name = os.path.splitext(file)[0]
+                boss_files.append((boss_name, file))
+        
+        if not boss_files:
+            ttk.Label(self.gui.boss_checkboxes_frame, 
+                     text="No boss images found", 
+                     style="Count.TLabel").grid(row=0, column=0, sticky=tk.W)
+            return
+        
+        # Create checkboxes - 5 boss per row, dồn về trái
+        for i, (boss_name, filename) in enumerate(boss_files):
+            row = i // 5  # 5 boss per row
+            col = i % 5   # 5 columns
+
+            # Create variable for checkbox
+            var = tk.BooleanVar()
+            self.gui.boss_vars[boss_name] = var
+
+            # Create checkbox
+            checkbox = ttk.Checkbutton(self.gui.boss_checkboxes_frame,
+                                       text=boss_name.replace('_', ' ').title(),
+                                       variable=var,
+                                       style="Boss.TCheckbutton")
+            checkbox.grid(row=row, column=col, sticky=tk.W, padx=5, pady=2)
+
+    def on_boss_language_change(self, event=None):
+        """Handle boss language change"""
+        try:
+            # Refresh boss checkboxes when language changes
+            self.setup_boss_checkboxes()
+        except Exception as e:
+            print(f"Error changing boss language: {e}")
+    
+    def check_all_bosses(self):
+        """Check tất cả boss checkboxes"""
+        try:
+            if hasattr(self.gui, 'boss_vars'):
+                for var in self.gui.boss_vars.values():
+                    var.set(True)
+                print("✅ Đã check tất cả boss")
+        except Exception as e:
+            print(f"❌ Lỗi khi check all bosses: {e}")
+    
+    def uncheck_all_bosses(self):
+        """Uncheck tất cả boss checkboxes"""
+        try:
+            if hasattr(self.gui, 'boss_vars'):
+                for var in self.gui.boss_vars.values():
+                    var.set(False)
+                print("✅ Đã uncheck tất cả boss")
+        except Exception as e:
+            print(f"❌ Lỗi khi uncheck all bosses: {e}")
