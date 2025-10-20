@@ -158,7 +158,11 @@ class DeviceManager:
                             "rally": "1",
                             "buy_meat": "2", 
                             "war_no_general": "3",
-                            "attack_boss": "4"
+                            "attack_boss": "4",
+                            "open_items": "5",
+                            "buy_general": "6",
+                            "advanced_rally": "7",
+                            "advanced_war": "8"
                         }
                         
                         feature_code = feature_codes.get(feature_key, "1")
@@ -177,6 +181,16 @@ class DeviceManager:
                                 task['troops_count'] = troops_count
                             except:
                                 task['troops_count'] = 1000  # Default fallback
+                        
+                        # Add selected_bosses for Advanced features
+                        if feature_key in ["advanced_rally", "advanced_war"]:
+                            try:
+                                selected_bosses = self.gui.get_selected_bosses()
+                                task['selected_bosses'] = selected_bosses
+                                self.gui.log_status(f"🎯 Advanced {feature_key}: Sử dụng {len(selected_bosses)} boss được chọn")
+                            except Exception as e:
+                                self.gui.log_status(f"⚠️ Không thể lấy selected_bosses cho {feature_key}: {e}")
+                                task['selected_bosses'] = []  # Default empty list
                         
                         # Import process manager
                         from components.process_manager import run_single_task_process

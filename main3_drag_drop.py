@@ -292,6 +292,7 @@ class DragDropGUI:
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
             "open_items": "📦 Auto Open Items",
+            "buy_general": "🛒 Auto Buy General",
             "advanced_rally": "⚔️ Advanced Rally",
             "advanced_war": "🎯 Advanced War (No General)"
         }
@@ -364,6 +365,7 @@ class DragDropGUI:
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
             "open_items": "📦 Auto Open Items",
+            "buy_general": "🛒 Auto Buy General",
             "advanced_rally": "⚔️ Advanced Rally",
             "advanced_war": "🎯 Advanced War (No General)"
         }
@@ -382,8 +384,9 @@ class DragDropGUI:
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
                 "attack_boss": ("4", "Auto tấn công Boss"),
                 "open_items": ("5", "Auto mở Items"),
-                "advanced_rally": ("6", "Advanced Rally với Boss Selection"),
-                "advanced_war": ("7", "Advanced War với Boss Selection")
+                "buy_general": ("6", "Auto mua tướng"),
+                "advanced_rally": ("7", "Advanced Rally với Boss Selection"),
+                "advanced_war": ("8", "Advanced War với Boss Selection")
             }
             
             feature_code, feature_name = feature_mapping[feature_key]
@@ -408,7 +411,9 @@ class DragDropGUI:
                 
                 # Add selected_bosses for Advanced features
                 if feature_key in ["advanced_rally", "advanced_war"]:
-                    task['selected_bosses'] = self.get_selected_bosses()
+                    selected_bosses = self.get_selected_bosses()
+                    task['selected_bosses'] = selected_bosses
+                    self.log_status(f"🎯 Debug: {feature_key} - Selected bosses: {selected_bosses} (type: {type(selected_bosses)})")
                 
                 tasks.append(task)
             
@@ -488,6 +493,7 @@ class DragDropGUI:
             "war_no_general": "🎯 Auto War (No General)",
             "attack_boss": "👹 Auto Attack Boss",
             "open_items": "📦 Auto Open Items",
+            "buy_general": "🛒 Auto Buy General",
             "advanced_rally": "⚔️ Advanced Rally",
             "advanced_war": "🎯 Advanced War (No General)"
         }
@@ -527,8 +533,9 @@ class DragDropGUI:
                 "war_no_general": ("3", "Auto tham gia War (không chọn tướng)"),
                 "attack_boss": ("4", "Auto tấn công Boss"),
                 "open_items": ("5", "Auto mở Items"),
-                "advanced_rally": ("6", "Advanced Rally với Boss Selection"),
-                "advanced_war": ("7", "Advanced War với Boss Selection")
+                "buy_general": ("6", "Auto mua tướng"),
+                "advanced_rally": ("7", "Advanced Rally với Boss Selection"),
+                "advanced_war": ("8", "Advanced War với Boss Selection")
             }
             
             # Collect all device-feature tasks (đảm bảo mỗi device chỉ chạy 1 feature)

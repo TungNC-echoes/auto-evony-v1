@@ -49,10 +49,12 @@ def run_single_task_process(task, task_index, total_tasks, log_queue):
         elif feature_code == "5":
             run_open_items_direct_process(device_id, log_queue=log_queue)
         elif feature_code == "6":
+            run_buy_general_direct_process(device_id, log_queue=log_queue)
+        elif feature_code == "7":
             # Advanced Rally
             selected_bosses = task.get('selected_bosses', [])
             run_advanced_rally_direct_process(device_id, log_queue=log_queue, selected_bosses=selected_bosses)
-        elif feature_code == "7":
+        elif feature_code == "8":
             # Advanced War
             selected_bosses = task.get('selected_bosses', [])
             run_advanced_war_direct_process(device_id, log_queue=log_queue, selected_bosses=selected_bosses)
@@ -226,7 +228,13 @@ def run_advanced_rally_direct_process(device_id, log_queue=None, selected_bosses
             log_queue.put(f"🔍 Debug: selected_bosses type: {type(selected_bosses)}, length: {len(selected_bosses) if selected_bosses else 0}")
         
         # Kiểm tra selected_bosses
-        if not selected_bosses:
+        if selected_bosses is None:
+            if log_queue:
+                log_queue.put("⚠️ selected_bosses is None, sử dụng logic Basic Rally")
+            # Fallback to Basic Rally if selected_bosses is None (error case)
+            from actions.rally import auto_join_rally
+            auto_join_rally(device_id, use_general=True)
+        elif len(selected_bosses) == 0:
             if log_queue:
                 log_queue.put("⚠️ Không có boss nào được chọn, sử dụng logic Basic Rally")
             # Fallback to Basic Rally if no bosses selected
@@ -251,7 +259,13 @@ def run_advanced_war_direct_process(device_id, log_queue=None, selected_bosses=N
             log_queue.put(f"🔍 Debug: selected_bosses type: {type(selected_bosses)}, length: {len(selected_bosses) if selected_bosses else 0}")
         
         # Kiểm tra selected_bosses
-        if not selected_bosses:
+        if selected_bosses is None:
+            if log_queue:
+                log_queue.put("⚠️ selected_bosses is None, sử dụng logic Basic Rally")
+            # Fallback to Basic Rally if selected_bosses is None (error case)
+            from actions.rally import auto_join_rally
+            auto_join_rally(device_id, use_general=False)
+        elif len(selected_bosses) == 0:
             if log_queue:
                 log_queue.put("⚠️ Không có boss nào được chọn, sử dụng logic Basic Rally")
             # Fallback to Basic Rally if no bosses selected
@@ -266,3 +280,19 @@ def run_advanced_war_direct_process(device_id, log_queue=None, selected_bosses=N
     except Exception as e:
         if log_queue:
             log_queue.put(f"❌ Lỗi khi chạy Advanced War trên {device_id}: {e}")
+
+
+def run_buy_general_direct_process(device_id, log_queue=None):
+    """Chạy auto_buy_general trong process con"""
+    try:
+        if log_queue:
+            log_queue.put(f"🛒 Bắt đầu auto buy general trên device {device_id}")
+        
+        from actions.buy_general_actions import auto_buy_general
+        auto_buy_general(device_id)
+        
+        if log_queue:
+            log_queue.put(f"✅ Hoàn thành auto buy general trên device {device_id}")
+    except Exception as e:
+        if log_queue:
+            log_queue.put(f"❌ Lỗi khi chạy auto buy general trên {device_id}: {e}")
