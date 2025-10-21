@@ -66,7 +66,11 @@ def find_all_boss_positions(selected_bosses, device_id):
             
             # Template matching với threshold thấp để tìm tất cả occurrences
             result = cv2.matchTemplate(screenshot, boss_template, cv2.TM_CCOEFF_NORMED)
-            threshold = 0.5  # Threshold thấp để tìm nhiều matches
+            threshold = 0.8  # Threshold cao hơn để tránh lẫn lộn
+            
+            # Debug: Hiển thị max confidence
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+            print(f"🔍 Boss '{boss_name}': Max confidence = {max_val:.3f}, Threshold = {threshold}")
             
             # Tìm tất cả locations
             locations = np.where(result >= threshold)

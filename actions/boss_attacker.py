@@ -229,6 +229,12 @@ def get_boss_config(boss_name, troops_count=500000):
             "image_path": get_image_path("buttons/attack/serpopard/"),
             "troops_count": str(troops_count),
             "threshold": 0.9
+        },
+        "Rắn Nhiều Đầu Cấp thấp": {
+            "folder": "hydra",
+            "image_path": get_image_path("buttons/attack/hydra/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.9
         }
     }
     
