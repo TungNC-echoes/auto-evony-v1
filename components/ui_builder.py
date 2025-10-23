@@ -145,14 +145,17 @@ class UIBuilder:
         scrollable_features_frame.columnconfigure(1, weight=1, minsize=670)  # Column thứ 2 - bằng nhau
         scrollable_features_frame.rowconfigure(0, weight=1)     # Row đầu tiên
         scrollable_features_frame.rowconfigure(1, weight=1)     # Row thứ 2 bằng nhau
-        scrollable_features_frame.rowconfigure(2, weight=1)     # Row thứ 3 (Auto Open Items)
+        scrollable_features_frame.rowconfigure(2, weight=1)     # Row thứ 3 (Auto Open Items + Buy General)
+        scrollable_features_frame.rowconfigure(3, weight=1)     # Row thứ 4 (Boss Selection)
+        scrollable_features_frame.rowconfigure(4, weight=1)     # Row thứ 5 (Advanced Features)
 
         # Feature containers (2 features per row)
         self.create_feature_container(scrollable_features_frame, "⚔️ Auto Rally", "rally", 0, 0)
         self.create_feature_container(scrollable_features_frame, "🛒 Auto Buy Meat", "buy_meat", 0, 1)
         self.create_feature_container(scrollable_features_frame, "🎯 Auto War (No General)", "war_no_general", 1, 0)
         self.create_feature_container(scrollable_features_frame, "👹 Auto Attack Boss", "attack_boss", 1, 1)
-        self.create_feature_container(scrollable_features_frame, "📦 Auto Open Items", "open_items", 2, 0, columnspan=2)
+        self.create_feature_container(scrollable_features_frame, "📦 Auto Open Items", "open_items", 2, 0)
+        self.create_feature_container(scrollable_features_frame, "🛒 Auto Buy General", "buy_general", 2, 1)
         
         # Boss selection section
         self.setup_boss_selection_ui(scrollable_features_frame)

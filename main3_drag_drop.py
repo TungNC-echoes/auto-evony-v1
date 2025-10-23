@@ -37,6 +37,7 @@ class DragDropGUI:
             "war_no_general": {"running": False, "processes": []},
             "attack_boss": {"running": False, "processes": []},
             "open_items": {"running": False, "processes": []},
+            "buy_general": {"running": False, "processes": []},
             "advanced_rally": {"running": False, "processes": []},
             "advanced_war": {"running": False, "processes": []}
         }
