@@ -53,7 +53,7 @@ def auto_join_rally(device_id=None, use_general=True):
     while True:
         try:
             # Kiểm tra xem có nút auto_join không (đang ở màn hình chiến tranh)
-            if not check_button_exists("auto_join", device_id=device_id):
+            if not check_button_exists("auto_join", device_id=device_id, threshold=0.8):
                 # print("Không ở màn hình chiến tranh, kiểm tra trạng thái...")
 
                 # Kiểm tra nút back
@@ -206,7 +206,7 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
             try:
                 # Kiểm tra auto_join button (giống Basic)
                 from utils.image_utils import check_button_exists, find_and_click_button
-                if not check_button_exists("auto_join", device_id=device_id):
+                if not check_button_exists("auto_join", device_id=device_id, threshold=0.8):
                     print("⚠️ Không còn ở trong war screen, có thể bị mất kết nối")
                     print("🔄 Thoát ra màn hình chính và tìm war_button...")
                     
