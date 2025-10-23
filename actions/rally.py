@@ -217,6 +217,12 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
                         adb_command('adb shell input keyevent KEYCODE_ESCAPE')
                         time.sleep(2)
                         
+                        # Kiểm tra auto_join trước - nếu có thì đã ở màn hình war rồi
+                        if check_button_exists("auto_join", device_id=device_id, threshold=0.8):
+                            print("✅ Đã ở màn hình war (có auto_join), bỏ qua việc tìm cancel")
+                            break
+                        
+                        # Nếu không có auto_join, mới tìm cancel
                         if check_button_exists("cancel", device_id=device_id, threshold=0.75):
                             print("✅ Tìm thấy button cancel, click để thoát ra màn hình chính")
                             if find_and_click_button("cancel", device_id=device_id, threshold=0.75):
@@ -224,23 +230,27 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
                                 print("✅ Đã thoát ra màn hình chính thành công")
                                 break
                     
-                    # Tìm war_button để vào lại war screen
-                    print("🔍 Tìm war_button để vào lại war screen...")
-                    war_button_found = False
-                    
-                    while not war_button_found:
-                        if check_button_exists("war_button", device_id=device_id):
-                            print("✅ Tìm thấy war_button, click để vào màn hình war")
-                            if find_and_click_button("war_button", device_id=device_id):
-                                time.sleep(3)
-                                war_button_found = True
-                                print("✅ Đã vào lại war screen")
+                    # Kiểm tra xem có cần tìm war_button không
+                    if not check_button_exists("auto_join", device_id=device_id, threshold=0.8):
+                        # Tìm war_button để vào lại war screen
+                        print("🔍 Tìm war_button để vào lại war screen...")
+                        war_button_found = False
+                        
+                        while not war_button_found:
+                            if check_button_exists("war_button", device_id=device_id):
+                                print("✅ Tìm thấy war_button, click để vào màn hình war")
+                                if find_and_click_button("war_button", device_id=device_id):
+                                    time.sleep(3)
+                                    war_button_found = True
+                                    print("✅ Đã vào lại war screen")
+                                else:
+                                    print("❌ Không thể click war_button")
+                                    time.sleep(2)
                             else:
-                                print("❌ Không thể click war_button")
-                                time.sleep(2)
-                        else:
-                            print("⏳ Chưa tìm thấy war_button... - Chờ 20s")
-                            time.sleep(20)
+                                print("⏳ Chưa tìm thấy war_button... - Chờ 20s")
+                                time.sleep(20)
+                    else:
+                        print("✅ Đã ở màn hình war (có auto_join), bỏ qua việc tìm war_button")
                     
                     continue
                 
