@@ -174,7 +174,7 @@ def get_boss_config(boss_name, troops_count=500000):
             "folder": "nguoi_da", 
             "image_path": get_image_path("buttons/attack/nguoi_da/"),
             "troops_count": str(troops_count),
-            "threshold": 0.7
+            "threshold": 0.8
         },
         "Pan (Viễn Quân)": {
             "folder": "pan_vien_quan", 
@@ -240,7 +240,7 @@ def get_boss_config(boss_name, troops_count=500000):
             "folder": "pumpkin",
             "image_path": get_image_path("buttons/attack/pumpkin/"),
             "troops_count": str(troops_count),
-            "threshold": 0.85
+            "threshold": 0.9
         }
     }
     
