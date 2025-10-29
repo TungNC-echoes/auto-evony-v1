@@ -277,7 +277,7 @@ def join_advanced_war_sequence(device_id=None, selected_bosses=None):
         from actions.war_actions import click_button_sequence
         # Sequence bỏ qua join_button vì đã click rồi
         ADVANCED_WAR_BUTTONS_SEQUENCE = [
-            ("doi_quan_san_co", 1),   # Nút đổi quân sân cỏ, chờ 1 giây
+            ("doi_quan_san_co", 2),   # Nút đổi quân sân cỏ, chờ 1 giây
             ("chon_tuong", 1),        # Nút chọn tướng, chờ 1 giây
             ("chon", 1),              # Nút chọn, chờ 1 giây
             ("hanh_quan", 1)          # Nút hành quân, chờ 1 giây

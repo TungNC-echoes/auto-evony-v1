@@ -119,7 +119,7 @@ def tap_screen(x, y):
     """Thực hiện tap (chạm) vào màn hình"""
     try:
         adb_command(f"adb shell input tap {x} {y}")
-        time.sleep(0.5)
+        time.sleep(1)
         return True
     except Exception as e:
         print(f"Lỗi khi tap màn hình: {e}")
