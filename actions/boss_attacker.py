@@ -182,6 +182,12 @@ def get_boss_config(boss_name, troops_count=500000):
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
+        "Pan (Lục Quân)": {
+            "folder": "pan_luc_quan",
+            "image_path": get_image_path("buttons/attack/pan_luc_quan/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
         "Harp bình thường": {
             "folder": "harp",
             "image_path": get_image_path("buttons/attack/harp/"),
