@@ -164,6 +164,12 @@ def get_boss_config(boss_name, troops_count=500000):
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
+        "Cerberus Cấp Trung": {
+            "folder": "cerberus",
+            "image_path": get_image_path("buttons/attack/cerberus/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
             "image_path": get_image_path("buttons/attack/pan_luc_quan/"),
@@ -185,6 +191,12 @@ def get_boss_config(boss_name, troops_count=500000):
         "Pan (Lục Quân)": {
             "folder": "pan_luc_quan",
             "image_path": get_image_path("buttons/attack/pan_luc_quan/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
+        "Pan (Kỵ Binh)": {
+            "folder": "pan_ky_binh",
+            "image_path": get_image_path("buttons/attack/pan_ky_binh/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
@@ -237,6 +249,12 @@ def get_boss_config(boss_name, troops_count=500000):
             "threshold": 0.9
         },
         "Rắn Nhiều Đầu Cấp thấp": {
+            "folder": "hydra",
+            "image_path": get_image_path("buttons/attack/hydra/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.85
+        },
+        "Rắn Nhiều Đầu Cấp trung": {
             "folder": "hydra",
             "image_path": get_image_path("buttons/attack/hydra/"),
             "troops_count": str(troops_count),
