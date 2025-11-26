@@ -210,7 +210,7 @@ def get_boss_config(boss_name, troops_count=500000):
             "folder": "phu_thuy",
             "image_path": get_image_path("buttons/attack/phu_thuy/"),
             "troops_count": str(troops_count),
-            "threshold": 0.75
+            "threshold": 0.7
         },
         "Nhân Sư": {
             "folder": "nhan_su",
@@ -221,6 +221,24 @@ def get_boss_config(boss_name, troops_count=500000):
         "Rùa Nham thạch": {
             "folder": "rua",
             "image_path": get_image_path("buttons/attack/rua/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
+        "(Trùm quái vật) Fafnir": {
+            "folder": "fafnir",
+            "image_path": get_image_path("buttons/attack/fafnir/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
+        "Quái vật Khổng lồ": {
+            "folder": "titan",
+            "image_path": get_image_path("buttons/attack/fafnir/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.8
+        },
+        "Phượng hoàng": {
+            "folder": "phonix",
+            "image_path": get_image_path("buttons/attack/fafnir/"),
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
