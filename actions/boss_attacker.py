@@ -170,6 +170,18 @@ def get_boss_config(boss_name, troops_count=500000):
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
+        "Cerberus Cấp Cao": {
+            "folder": "cerberus",
+            "image_path": get_image_path("buttons/attack/cerberus/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.7
+        },
+        "Normal Gugler Knight": {
+            "folder": "gugler_knight",
+            "image_path": get_image_path("buttons/attack/gugler_knight/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.8
+        },
         "Pan (Lục QUân)": {
             "folder": "pan_luc_quan", 
             "image_path": get_image_path("buttons/attack/pan_luc_quan/"),
@@ -255,6 +267,18 @@ def get_boss_config(boss_name, troops_count=500000):
             "threshold": 0.75
         },
         "Hiệp sĩ Cấp thấp Bayard": {
+            "folder": "bayard",
+            "image_path": get_image_path("buttons/attack/bayard/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.8
+        },
+        "Hiệp sĩ Cấp cao Bayar": {
+            "folder": "bayard",
+            "image_path": get_image_path("buttons/attack/bayard/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.8
+        },
+        "Hiệp Sĩ Bayar Hoàn Hảo": {
             "folder": "bayard",
             "image_path": get_image_path("buttons/attack/bayard/"),
             "troops_count": str(troops_count),
