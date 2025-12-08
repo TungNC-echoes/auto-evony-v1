@@ -176,7 +176,7 @@ def get_boss_config(boss_name, troops_count=500000):
             "troops_count": str(troops_count),
             "threshold": 0.7
         },
-        "Normal Gugler Knight": {
+        "Kỵ Sĩ Gugler Thường": {
             "folder": "gugler_knight",
             "image_path": get_image_path("buttons/attack/gugler_knight/"),
             "troops_count": str(troops_count),
