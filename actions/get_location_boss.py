@@ -72,83 +72,74 @@ def login_iscout():
         return None
 
 def get_boss_locations(port=9014, max_retries=3):
-    """Lấy thông tin vị trí boss từ web và trả về dạng list"""
+    """Lấy thông tin vị trí boss từ bảng có class đặc định"""
     driver = None
     retry_count = 0
-    
+
     while retry_count < max_retries:
         try:
-            # Thiết lập để kết nối với Chrome đang mở
             chrome_options = Options()
             chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
-            
-            # Kết nối với Chrome đang mở
+
             driver = webdriver.Chrome(options=chrome_options)
             wait = WebDriverWait(driver, 20)
             boss_list = []
-            
-            # Kiểm tra xem đã ở trang dashboard chưa
-            current_url = driver.current_url
-            if "dashboard" not in current_url:
-                print("Đang chuyển đến trang dashboard...")
-                driver.get("https://www.iscout.club/vi/dashboard")
-            # else:
-            #     print("Đang refresh trang dashboard...")
-            #     driver.refresh()
-                
-            # # Chờ 10 giây để trang load hoàn tất và các filter được áp dụng
-            # print("Chờ 10 giây để trang load hoàn tất...")
-            # time.sleep(10)
 
-            # Chờ và tìm bảng boss
-            print("Đang tìm thông tin boss...")
-            table = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody")))
-            rows = table.find_elements(By.TAG_NAME, "tr")
-            
+            if "dashboard" not in driver.current_url:
+                driver.get("https://www.iscout.club/vi/dashboard")
+
+            print("Đang tìm bảng boss với class cụ thể...")
+
+            # Sử dụng CSS Selector kết hợp các class bạn đã cung cấp
+            # Dấu chấm (.) thay thế cho khoảng trắng giữa các class
+            table_selector = "table.min-w-full.divide-y.divide-gray-300.mb-4 tbody tr"
+
+            # Chờ các dòng dữ liệu của bảng này xuất hiện
+            rows = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, table_selector)))
+
             for row in rows:
                 cols = row.find_elements(By.TAG_NAME, "td")
-                if cols:
-                    # Xử lý level string thành object
-                    level_text = cols[2].text if len(cols) > 2 else ""
+
+                # Kiểm tra nếu dòng này có dữ liệu (tránh dòng trống hoặc header)
+                if len(cols) >= 3:
+                    level_text = cols[2].text
                     level_info = {}
-                    
-                    # Tách và xử lý thông tin tọa độ
+
                     if level_text:
                         lines = level_text.split('\n')
                         for line in lines:
                             if ':' in line:
-                                key, value = line.split(':', 1)
-                                key = key.strip()
-                                value = value.strip()
+                                key, value = map(str.strip, line.split(':', 1))
                                 if key in ['S', 'X', 'Y']:
                                     level_info[key] = value
-                    
+
                     boss_info = {
-                        "name": cols[0].text,
-                        "coordinates": cols[1].text,
+                        "name": cols[0].text.strip(),
+                        "coordinates": cols[1].text.strip(),
                         "level": level_info,
                         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "attacked": 0  # Thêm trường attacked với giá trị mặc định là 0
+                        "attacked": 0
                     }
-                    boss_list.append(boss_info)
-                    print(f"Đã thêm boss: {boss_info['name']} tại {boss_info['coordinates']}")
-            
+
+                    # Chỉ thêm vào list nếu tên boss không rỗng
+                    if boss_info["name"]:
+                        boss_list.append(boss_info)
+                        print(f"Đã lấy: {boss_info['name']} ({boss_info['coordinates']})")
+
             return boss_list
 
         except Exception as e:
             retry_count += 1
-            print(f"Lỗi trong lần thử {retry_count}: {e}")
+            print(f"Lỗi lần {retry_count}: {e}")
             if retry_count < max_retries:
-                print(f"Đang thử lại sau 5 giây...")
                 time.sleep(5)
-            else:
-                print("Đã hết số lần thử lại")
         finally:
             if driver:
+                # Lưu ý: quit() sẽ đóng toàn bộ trình duyệt.
+                # Nếu bạn muốn giữ tab đó để làm việc khác, hãy cân nhắc kỹ.
                 driver.quit()
-    
-    return []
 
+    return []
 def save_to_json(boss_list, filename="boss_locations.json", device_id=None):
     """Lưu danh sách boss vào file JSON"""
     try:
