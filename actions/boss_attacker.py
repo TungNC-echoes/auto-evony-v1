@@ -325,6 +325,12 @@ def get_boss_config(boss_name, troops_count=500000):
             "image_path": get_image_path("buttons/attack/nian/"),
             "troops_count": str(troops_count),
             "threshold": 0.75
+        },
+        "Nasu Thường": {
+            "folder": "nasu",
+            "image_path": get_image_path("buttons/attack/nasu/"),
+            "troops_count": str(troops_count),
+            "threshold": 0.75
         }
     }
     
