@@ -149,6 +149,20 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
             find_all_boss_positions,
             find_join_button_below_boss,
         )
+
+        def back_to_auto_join_screen():
+            """Quay lại màn hình war list (có auto_join) sau khi phát hiện click nhầm boss."""
+            max_attempts = 5
+            for attempt in range(max_attempts):
+                if check_button_exists("auto_join", device_id=device_id, threshold=0.8):
+                    print("✅ Đã quay về màn hình war (có auto_join)")
+                    return True
+
+                print(f"↩️ Đang back về auto_join... ({attempt+1}/{max_attempts})")
+                adb_command('adb shell input keyevent KEYCODE_ESCAPE')
+                time.sleep(2)
+
+            return check_button_exists("auto_join", device_id=device_id, threshold=0.8)
         
         # Thiết lập device
         if device_id:
@@ -254,7 +268,7 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
                     
                     continue
                 
-                # ADVANCED LOGIC: Tìm và xử lý boss (Cách 2 - đơn giản)
+                # ADVANCED LOGIC: Tìm và xử lý boss
                 boss_attacked = False  # Flag để biết có boss nào được tấn công không
                 
                 # 1. Tìm tất cả boss được chọn
@@ -287,7 +301,20 @@ def auto_join_advanced_rally_with_boss_selection(device_id=None, use_general=Tru
                             print(f"🖱️ Đang click join button tại ({join_x}, {join_y}) cho boss {boss_name}")
                             if tap_screen(join_x, join_y):
                                 print(f"✅ Đã click join button cho boss {boss_name}")
-                                boss_attacked = True  # Set True ngay khi click thành công
+                                time.sleep(1)
+
+                                # Xác nhận lại boss mục tiêu vẫn xuất hiện để tránh click nhầm boss khác
+                                verify_positions = find_all_boss_positions(selected_bosses, device_id)
+                                if not verify_positions:
+                                    print(f"⚠️ Không còn thấy boss {boss_name} sau khi click join, nghi ngờ click nhầm boss")
+                                    print("↩️ Quay lại màn hình có auto_join để chạy lại từ đầu...")
+                                    if back_to_auto_join_screen():
+                                        print("✅ Đã quay lại màn hình auto_join, bỏ lượt hiện tại")
+                                    else:
+                                        print("❌ Không thể quay lại màn hình auto_join, sẽ thử lại ở vòng sau")
+                                    continue
+
+                                boss_attacked = True  # Chỉ set True khi boss target được xác nhận
                                 
                                 # 6. Thực hiện war sequence
                                 if use_general:
